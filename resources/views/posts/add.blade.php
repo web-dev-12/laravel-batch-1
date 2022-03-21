@@ -15,7 +15,8 @@
          <div class="row">
              <div class="col-md-12">
                 <h1>Add Post</h1>
-                <form>
+                <form method="post" action="{{route('add.post')}}">
+                  @csrf
                     <div class="mb-3">
                         <label for="blogName" class="form-label">Blog Name</label>
                         <input type="text" class="form-control" id="blogName" name="blogName">

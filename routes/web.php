@@ -19,5 +19,6 @@ use App\Http\Controllers\PostController;
 Route::get('/test-page',function(){
 	return view('test');
 });*/
-Route::get('/',[PostController::class,'viewPosts']);
+Route::get('/',[PostController::class,'viewPosts'])->name('all.posts');
 Route::get('add/post',[PostController::class,'addPost'])->name('add.post');
+Route::post('add/post',[PostController::class,'savePost'])->name('add.post');
