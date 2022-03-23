@@ -9,10 +9,10 @@ class PostController extends Controller
 {
     public function viewPosts(){
         $posts = Post::all();
-        echo '<pre>';
+        /*echo '<pre>';
         print_r($posts->toArray());
-        echo '</pre>';
-        //return view('posts/all',compact('posts'));
+        echo '</pre>';*/
+        return view('posts/all',compact('posts'));
     }
     public function addPost(){
         return view('posts/add');
@@ -23,6 +23,22 @@ class PostController extends Controller
         $post->blogName = $request->blogName;
         $post->blogDes  = $request->blogDes;
         $post->save();
+        return redirect(route('all.posts'));
+    }
+    public function editPost($id){
+        $post = Post::find($id);
+        return view('posts/edit',compact('post'));
+    }
+    public function updatePost(Request $request, $id){
+        $post = Post::find($id);
+        $post->blogName = $request->blogName;
+        $post->blogDes  = $request->blogDes;
+        $post->save();
+        return redirect(route('all.posts'));
+    }
+    public function deletePost($id){
+        $post = Post::find($id);
+        $post->delete();
         return redirect(route('all.posts'));
     }
 }

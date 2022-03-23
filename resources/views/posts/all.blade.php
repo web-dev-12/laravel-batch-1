@@ -28,12 +28,21 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($posts as $post)
                             <tr>
-                                <td>1</td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{$post->blogName}}</td>
+                                <td>{{$post->blogDes}}</td>
+                                <td>
+                                    <a href="{{route('edit.post',$post->id)}}">Edit</a>
+                                    <form action="{{route('delete.post',$post->id)}}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                    
+                                </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
