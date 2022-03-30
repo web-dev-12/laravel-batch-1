@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\StudentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,3 +26,7 @@ Route::post('add/post',[PostController::class,'savePost'])->name('add.post');
 Route::get('edit/post/{id}',[PostController::class,'editPost'])->name('edit.post');
 Route::post('update/post/{id}',[PostController::class,'updatePost'])->name('update.post');
 Route::post('delete/post/{id}',[PostController::class,'deletePost'])->name('delete.post');
+
+/*Resource Controller*/
+
+Route::resource('/student',StudentController::class);
