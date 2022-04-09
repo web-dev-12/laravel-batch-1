@@ -8,14 +8,14 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <title>All Studnets</title>
+    <title>All Student</title>
   </head>
   <body>
      <div class="container">
          <div class="row">
              <div class="col-md-12">
-                <h1>All Students</h1>
-                <a href="{{ route('student.create') }}" class="btn btn-info">Add Studnet</a>
+                <h1>All Student</h1>
+                <a href="{{ route('student.create') }}" class="btn btn-info">Add Student</a>
                 {{--<a href="{{ url('student/create') }}" class="btn btn-info">Add Studnet</a>--}}
                 @if(Session::has('msg'))
                 <p class="alert {{ Session::get('alert-class', 'alert-info') }}">
@@ -44,8 +44,14 @@
                                 <td>{{ $student->email }}</td>
                                 <td>{{ $student->mobile }}</td>
                                 <td>
+                                    <a href="{{route('student.show', $student->id)}}" class="btn btn-primary">Show</a>
                                     <a href="{{route('student.edit', $student->id)}}" class="btn btn-success">Edit</a>
-                                    <a href="{{route('student.destroy', $student->id)}}" class="btn btn-danger">Delete</a>
+
+                                    <form action="{{route('student.destroy',$student->id)}}" method="POST">
+                                    @method('DELETE')    
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
                            @endforeach

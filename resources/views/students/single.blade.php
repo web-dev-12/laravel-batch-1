@@ -8,42 +8,32 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <title>All Blog Post</title>
+    <title>All Studnets</title>
   </head>
   <body>
      <div class="container">
          <div class="row">
              <div class="col-md-12">
-                <h1>All Post</h1>
-                <a href="{{ url("add/post") }}" class="btn btn-info">Add Post (URL)</a>
-                <a href="{{ route("add.post") }}" class="btn btn-info">Add Post (Route)</a>
-                <a href="{{ route("student.index") }}" class="btn btn-info">Students (Resource)</a>
+                <a href="{{ route('student.index') }}" class="btn btn-info">All Student</a>
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Blog Name</th>
-                            <th scope="col">Blog Description</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">Student Name</th>
+                            <th scope="col">Father Name</th>
+                            <th scope="col">Mother Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Contact</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($posts as $post)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{$post->blogName}}</td>
-                                <td>{{$post->blogDes}}</td>
-                                <td>
-                                    <a href="{{route('edit.post',$post->id)}}">Edit</a>
-                                    <form action="{{route('delete.post',$post->id)}}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                    </form>
-                                    
-                                </td>
+                                <td>{{ $student_data->stuName }}</td>
+                                <td>{{ $student_data->fName }}</td>
+                                <td>{{ $student_data->mName }}</td>
+                                <td>{{ $student_data->email }}</td>
+                                <td>{{ $student_data->mobile }}</td>
                             </tr>
-                            @endforeach
                         </tbody>
                     </table>
                 </div>

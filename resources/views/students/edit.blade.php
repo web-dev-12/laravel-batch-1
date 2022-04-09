@@ -8,30 +8,42 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <title>Add Blog Post</title>
+    <title>Add Studnet</title>
   </head>
   <body>
      <div class="container">
          <div class="row">
              <div class="col-md-12">
-                <h1>Add Post</h1>
-                @if($post)
-                <form method="post" action="{{route('update.post',$post->id)}}">
-                  @csrf
+                <h1>Add Student</h1>
+                <form method="post" action="{{route('student.update',$student_data->id)}}">
+                @method('PUT')
+                @csrf
+                   
                     <div class="mb-3">
-                        <label for="blogName" class="form-label">Blog Name</label>
-                        <input type="text" class="form-control" id="blogName" name="blogName" value="{{$post->blogName}}">
+                        <label for="stuName" class="form-label">Student Name</label>
+                        <input type="text" class="form-control" id="stuName" name="stuName" value="{{$student_data->stuName}}">
                     </div>
                     <div class="mb-3">
-                        <label for="blogDes" class="form-label">Blog Description</label>
-                        <textarea class="form-control" id="blogDes" rows="10" name="blogDes">{{$post->blogDes}}</textarea>
+                        <label for="fName" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="fName" name="fName" value="{{$student_data->fName}}">
                     </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <div class="mb-3">
+                        <label for="mName" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="mName" name="mName" value="{{$student_data->mName}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="text" class="form-control" id="email" name="email" value="{{$student_data->email}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="mobile" class="form-label">Mobile</label>
+                        <input type="text" class="form-control" id="mobile" name="mobile" value="{{$student_data->mobile}}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
-                @endif
              </div>
          </div>
-    </div>   
+     </div>   
     
     
     <!-- Optional JavaScript; choose one of the two! -->

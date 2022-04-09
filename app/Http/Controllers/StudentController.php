@@ -54,7 +54,8 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        //
+        $student_data = Student::find($student)->first();
+        return view('students.single',compact('student_data'));
     }
 
     /**
@@ -65,7 +66,8 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        //
+        $student_data = Student::find($student)->first();
+        return view('students.edit',compact('student_data'));
     }
 
     /**
@@ -77,7 +79,14 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        //
+        $student = Student::find($student)->first();
+        $student->stuName = $request->stuName;
+        $student->fName = $request->fName;
+        $student->mName = $request->mName;
+        $student->email = $request->email;
+        $student->mobile = $request->mobile;
+        $student->save();
+        return redirect(route('student.index'))->with('msg','Student Data Updated Successfully');
     }
 
     /**
@@ -88,6 +97,7 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        Student::destroy($student->id);
+        return redirect(route('student.index'))->with('msg','Student Data Deleted Successfully');
     }
 }
