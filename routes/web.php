@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\StudentClassController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,3 +31,4 @@ Route::post('delete/post/{id}',[PostController::class,'deletePost'])->name('dele
 /*Resource Controller*/
 
 Route::resource('/student',StudentController::class);
+Route::resource('/studentClass',StudentClassController::class);

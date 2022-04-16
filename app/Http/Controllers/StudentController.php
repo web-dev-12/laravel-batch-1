@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\StudentClass;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -25,7 +26,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('students.add');
+        $classes = StudentClass::all();
+        return view('students.add',compact('classes'));
     }
 
     /**
@@ -42,6 +44,7 @@ class StudentController extends Controller
         $student->mName = $request->mName;
         $student->email = $request->email;
         $student->mobile = $request->mobile;
+        $student->class_id = $request->class_id;
         $student->save();
         return redirect(route('student.index'))->with('msg','Student Data Inserted Successfully');
     }
@@ -52,9 +55,9 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Student $student)
+    public function show($id)
     {
-        $student_data = Student::find($student)->first();
+        $student_data = Student::find($id);
         return view('students.single',compact('student_data'));
     }
 
@@ -64,9 +67,9 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function edit(Student $student)
+    public function edit($id)
     {
-        $student_data = Student::find($student)->first();
+        $student_data = Student::find($id);
         return view('students.edit',compact('student_data'));
     }
 
@@ -77,9 +80,9 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Student $student)
+    public function update(Request $request, $id)
     {
-        $student = Student::find($student)->first();
+        $student = Student::find($id);
         $student->stuName = $request->stuName;
         $student->fName = $request->fName;
         $student->mName = $request->mName;
