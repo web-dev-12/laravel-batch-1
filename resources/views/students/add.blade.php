@@ -6,16 +6,31 @@
                 <p class="alert {{ Session::get('alert-class', 'alert-info') }}">
                     {{ Session::get('msg') }}</p>
                 @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <form method="post" action="{{route('student.store')}}">
                   @csrf
                     <div class="mb-3">
                         <label for="stuName" class="form-label">Student Name</label>
                         <input type="text" class="form-control" id="stuName" name="stuName">
                     </div>
+                    @if($errors->has('stuName'))
+                    {{$errors->first('stuName')}}
+                    @endif
                     <div class="mb-3">
                         <label for="fName" class="form-label">First Name</label>
                         <input type="text" class="form-control" id="fName" name="fName">
                     </div>
+                    @error('fName')
+                    {{$message}}
+                    @enderror
                     <div class="mb-3">
                         <label for="mName" class="form-label">Last Name</label>
                         <input type="text" class="form-control" id="mName" name="mName">

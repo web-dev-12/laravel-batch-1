@@ -16,6 +16,7 @@
                             <th scope="col">Student Name</th>
                             <th scope="col">Father Name</th>
                             <th scope="col">Mother Name</th>
+                            <th scope="col">Class</th>
                             <th scope="col">Email</th>
                             <th scope="col">Contact</th>
                             <th scope="col">Action</th>
@@ -28,6 +29,10 @@
                                 <td>{{ $student->stuName }}</td>
                                 <td>{{ $student->fName }}</td>
                                 <td>{{ $student->mName }}</td>
+                                <td>
+                                    {{-- $student->studentclass->className --}}<!--ORM One to One-->
+                                    {{$student->className}}<!--Query Builder-->
+                                </td>
                                 <td>{{ $student->email }}</td>
                                 <td>{{ $student->mobile }}</td>
                                 <td>

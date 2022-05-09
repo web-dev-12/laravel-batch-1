@@ -6,6 +6,8 @@ use App\Models\Student;
 use App\Models\StudentClass;
 use Illuminate\Http\Request;
 
+use DB; 
+
 class StudentController extends Controller
 {
     /**
@@ -15,7 +17,13 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::all();
+        /*===ORM===*/
+       // $students = Student::all();
+        /*===Query Builder select and join query====*/
+        $students = DB::table('students')
+                    ->join('student_classes','students.class_id','=','student_classes.id')
+                    ->get();
+        //dd($students);
         return view('students.all',compact('students'));
     }
 
@@ -38,6 +46,19 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate(
+            [
+                'stuName'  => 'required',
+                'fName'    => 'required',
+                'mName'    => 'required',
+                'email'    => 'required|unique:students',
+                'mobile'   => 'unique:students',
+                'class_id' => 'required'
+            ],
+            [
+                'stuName.required' => 'Student Name Can not be empty!',
+            ]
+        );
         $student = new Student();
         $student->stuName = $request->stuName;
         $student->fName = $request->fName;
@@ -70,7 +91,8 @@ class StudentController extends Controller
     public function edit($id)
     {
         $student_data = Student::find($id);
-        return view('students.edit',compact('student_data'));
+        $classes = StudentClass::all();
+        return view('students.edit',compact('student_data','classes'));
     }
 
     /**
@@ -88,6 +110,7 @@ class StudentController extends Controller
         $student->mName = $request->mName;
         $student->email = $request->email;
         $student->mobile = $request->mobile;
+        $student->class_id = $request->class_id;
         $student->save();
         return redirect(route('student.index'))->with('msg','Student Data Updated Successfully');
     }
