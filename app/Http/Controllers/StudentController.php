@@ -53,13 +53,21 @@ class StudentController extends Controller
                 'mName'    => 'required',
                 'email'    => 'required|unique:students',
                 'mobile'   => 'unique:students',
-                'class_id' => 'required'
+                'class_id' => 'required',
+                'image'    => 'required|mimes:jpg,jpeg,png'
             ],
             [
                 'stuName.required' => 'Student Name Can not be empty!',
             ]
         );
         $student = new Student();
+        if($request->has('image')){
+           // dd($request);
+            $image = $request->file('image');
+            $name = time().uniqid().'.'.$image->extension();
+            $image->move('storage/app/students',$name);
+            $student->image = $name;
+        }
         $student->stuName = $request->stuName;
         $student->fName = $request->fName;
         $student->mName = $request->mName;

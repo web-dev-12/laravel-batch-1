@@ -15,7 +15,7 @@
                         </ul>
                     </div>
                 @endif
-                <form method="post" action="{{route('student.store')}}">
+                <form method="post" action="{{route('student.store')}}" enctype="multipart/form-data">
                   @csrf
                     <div class="mb-3">
                         <label for="stuName" class="form-label">Student Name</label>
@@ -31,6 +31,10 @@
                     @error('fName')
                     {{$message}}
                     @enderror
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Image</label>
+                        <input type="file" class="form-control" id="image" name="image">
+                    </div>
                     <div class="mb-3">
                         <label for="mName" class="form-label">Last Name</label>
                         <input type="text" class="form-control" id="mName" name="mName">

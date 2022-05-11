@@ -14,6 +14,7 @@
                             <tr>
                             <th scope="col">#</th>
                             <th scope="col">Student Name</th>
+                            <th scope="col">Image</th>
                             <th scope="col">Father Name</th>
                             <th scope="col">Mother Name</th>
                             <th scope="col">Class</th>
@@ -27,6 +28,9 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $student->stuName }}</td>
+                                <td>
+                                    <img src="{{Storage::url('app/students/'. $student->image)}}"/>
+                                </td>
                                 <td>{{ $student->fName }}</td>
                                 <td>{{ $student->mName }}</td>
                                 <td>
