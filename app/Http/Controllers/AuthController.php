@@ -45,4 +45,10 @@ class AuthController extends Controller
             return redirect(route('login'));
         }
     }
+    public function check_balance(Request $request){
+        echo "Ok";
+    }
+    public function denied(){
+        return view('denied');
+    }
 }
