@@ -6,6 +6,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentClassController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\AuthenticationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,10 +17,23 @@ use App\Http\Controllers\TestController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+/*Login|Resigter Route */
+Route::get('/',[AuthenticationController::class,'signInForm'])->name('signInForm');
+Route::post('/login',[AuthenticationController::class,'signIn'])->name('logIn');
 
-Route::get('/', function () {
+
+
+
+
+
+
+
+
+
+
+/*Route::get('/', function () {
     return view('dashboard.superadmin_dashboard');
-});
+});*/
 /*Route::get('/test-page',function(){
 	return view('test');
 });*/

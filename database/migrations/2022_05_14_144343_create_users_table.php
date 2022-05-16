@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Carbon\carbon;
 
 class CreateUsersTable extends Migration
 {
@@ -30,7 +31,28 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
-
+        DB::table('users')->insert([
+            [
+            'name'      => 'Superadmin',
+            'username'  => 'superadmin',
+            'email'     => 'superadmin@gmail.com',
+            'mobileNumber'  => '123456789',
+            'password'      => md5('superadmin'),
+            'status'        =>  1,
+            'roleId'        => 1,
+            'created_at'    =>  carbon::now()
+            ],
+            [
+                'name'      => 'user',
+                'username'  => 'user',
+                'email'     => 'user@gmail.com',
+                'mobileNumber'  => '12345678',
+                'password'      => md5('user'),
+                'status'        =>  1,
+                'roleId'        => 2,
+                'created_at'    =>  carbon::now()
+            ]     
+        ]);
     }
 
     /**

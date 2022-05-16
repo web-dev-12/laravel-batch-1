@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Carbon\carbon;
 
 class CreateRolesTable extends Migration
 {
@@ -21,18 +22,18 @@ class CreateRolesTable extends Migration
         });
 
         /*Default Role To Insert */
-        DB::table('roles')->insert(
+        DB::table('roles')->insert([
             [
                 'type'          =>'Superadmin',
                 'identity'      =>'superadmin',
-                'created_at'    => Carbon::now()   
+                'created_at'    => carbon::now()   
             ],
             [
                 'type'          =>'User',
                 'identity'      =>'user',
-                'created_at'    => Carbon::now()   
+                'created_at'    => carbon::now()   
             ],
-        );
+        ]);
     }
 
     /**
