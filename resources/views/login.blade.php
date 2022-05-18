@@ -1,20 +1,20 @@
 @extends('layouts.master')
 @section('content')
+
 <form method="post" action="{{route('login')}}">
   {{csrf_field()}}
   @if(Session::has('error'))
-               
-                    {{ Session::get('error') }}
-                @endif
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+    {{ Session::get('error') }}
+  @endif
+  @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+  @endif
   <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
     <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email">

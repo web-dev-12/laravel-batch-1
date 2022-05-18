@@ -5,9 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 
+//Custom Response Message
+use App\Http\Traits\ResponseTrait;
+
 class AuthenticationController extends Controller
 {
+    use ResponseTrait; 
     public function signInForm(){
+        echo '<pre>';
+        print_r(request()->session());
+        echo '</pre>';
+        die;
         return view('authentication.login');
     }
     public function signIn(Request $request){
@@ -18,9 +26,9 @@ class AuthenticationController extends Controller
         );
         //print_r($request->toArray());
         if(!!$this->validUser($request)){
-
+            return redirect(route($this->validUser($request)->roleIdentity.'Dashboard'))->with($this->responseMessage(true,null,'Login Success'));//superadmin.Dashboard|user.Dashboard
         }else{
-            
+            return redirect(route('signInForm'))->with($this->responseMessage(false,'error','Invalid Email Or Password'));
         }
     }
     protected function validUser($request){
@@ -45,7 +53,7 @@ class AuthenticationController extends Controller
             'email'         => $user->email,
             'mobileNumber'  => $user->mobileNumber,
             'roleId'        => $user->roleId,
-            'roleIdentity'  => $uesr->roleIdentity
+            'roleIdentity'  => $user->roleIdentity
         ]);
     }
 }

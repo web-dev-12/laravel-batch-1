@@ -7,6 +7,7 @@ use App\Http\Controllers\StudentClassController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,8 +19,18 @@ use App\Http\Controllers\AuthenticationController;
 |
 */
 /*Login|Resigter Route */
-Route::get('/',[AuthenticationController::class,'signInForm'])->name('signInForm');
-Route::post('/login',[AuthenticationController::class,'signIn'])->name('logIn');
+Route::group(['middleware' => 'UnknownUser'],function(){
+    Route::get('/',[AuthenticationController::class,'signInForm'])->name('signInForm');
+    Route::post('/login',[AuthenticationController::class,'signIn'])->name('logIn');
+});
+
+/*Superadmin Group*/
+Route::group(['middleware' => 'isSuperAdmin'],function(){
+    Route::prefix('superadmin')->group(function(){
+        Route::get('/dashboard',[DashboardController::class,'index'])->name('superadminDashboard');
+    });
+});
+
 
 
 
