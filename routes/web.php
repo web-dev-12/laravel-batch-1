@@ -8,6 +8,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\WalletController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,6 +24,7 @@ Route::group(['middleware' => 'UnknownUser'],function(){
     Route::get('/',[AuthenticationController::class,'signInForm'])->name('signInForm');
     Route::post('/login',[AuthenticationController::class,'signIn'])->name('logIn');
 });
+Route::get('/logout',[AuthenticationController::class,'signOut'])->name('logOut');
 
 /*Superadmin Group*/
 Route::group(['middleware' => 'isSuperAdmin'],function(){
@@ -30,6 +32,15 @@ Route::group(['middleware' => 'isSuperAdmin'],function(){
         Route::get('/dashboard',[DashboardController::class,'index'])->name('superadminDashboard');
     });
 });
+
+/*Superadmin Group*/
+Route::group(['middleware' => 'isUser'],function(){
+    Route::prefix('user')->group(function(){
+        Route::get('/dashboard',[DashboardController::class,'userindex'])->name('userDashboard');
+        Route::resource('/wallet',WalletController::class,["as" => "user"]);
+    });
+});
+
 
 
 

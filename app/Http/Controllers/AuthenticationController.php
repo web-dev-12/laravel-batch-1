@@ -12,10 +12,10 @@ class AuthenticationController extends Controller
 {
     use ResponseTrait; 
     public function signInForm(){
-        echo '<pre>';
+       /*echo '<pre>';
         print_r(request()->session());
         echo '</pre>';
-        die;
+        die;*/
         return view('authentication.login');
     }
     public function signIn(Request $request){
@@ -26,7 +26,7 @@ class AuthenticationController extends Controller
         );
         //print_r($request->toArray());
         if(!!$this->validUser($request)){
-            return redirect(route($this->validUser($request)->roleIdentity.'Dashboard'))->with($this->responseMessage(true,null,'Login Success'));//superadmin.Dashboard|user.Dashboard
+            return redirect(route($this->validUser($request)->roleIdentity.'Dashboard'))->with($this->responseMessage(true,null,'Login Success'));//superadminDashboard|userDashboard
         }else{
             return redirect(route('signInForm'))->with($this->responseMessage(false,'error','Invalid Email Or Password'));
         }
@@ -55,5 +55,9 @@ class AuthenticationController extends Controller
             'roleId'        => $user->roleId,
             'roleIdentity'  => $user->roleIdentity
         ]);
+    }
+    public function signOut(){
+        request()->session()->flush();
+        return redirect(route('signInForm'))->with($this->responseMessage(true,'error','Logged Out Successfully!'));
     }
 }

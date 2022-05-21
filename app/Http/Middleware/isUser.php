@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\Role;
 use Session;
 
-class isSuperAdmin
+class isUser
 {
     /**
      * Handle an incoming request.
@@ -27,7 +27,7 @@ class isSuperAdmin
             if(!$user || !$role){
                 return redirect()->route('logOut');
                 
-            }elseif($role->identity !='superadmin'){
+            }elseif($role->identity !='user'){
                 return redirect(route($role->identity.'Dashboard'))->with($this->responseMessage(true,null,'Access Deined'));
             }else{
                 return $next($request);
