@@ -20,6 +20,7 @@ class CreateWalletsTable extends Migration
             $table->integer('mobile_bank_id')->nullable();
             $table->integer('bank_id')->nullable();
             $table->integer('user_id');
+            $table->tinyInteger('status')->default(1)->comment('1 =>active, 2=> inactive');
             $table->timestamps();
         });
     }

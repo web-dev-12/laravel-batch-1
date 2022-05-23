@@ -621,7 +621,7 @@
 							<span class="nav-text">Dashboard</span>
 						</a>
                     </li>
-					
+					@if(currentUser() == 'user')
                     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 						<i class="fas fa-info-circle"></i>
 							<span class="nav-text">Wallet</span>
@@ -631,7 +631,7 @@
                             <li><a href="{{route(currentUser().'.wallet.create')}}">Add Wallet</a></li>
                         </ul>
                     </li>
-
+					@endif
                 </ul>
 
 				
