@@ -28,7 +28,7 @@
                                                 <label class="form-label">Select Wallet Type</label>
                                                 <select id="" class="default-select form-control wide wallet_type" name="wallet_type">
                                                     <option selected="">Choose...</option>
-                                                    @if(!$wallet)
+                                                    @if(!in_array(1,$wallet))
                                                     <option value="1">Cash|Moneybag</option>
                                                     @endif
                                                     <option value="2">Bank</option>

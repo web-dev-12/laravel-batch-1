@@ -74,10 +74,10 @@
         $('[name=wallet_type]').attr('disabled', true);
         var wallet_id = {{$wallet->wallet_type}};
         wallet(wallet_id);
-        $('.wallet_type').on('change', function() {
-            wallet_id = $(this).val();
-            wallet(wallet_id);
-        });
+        // $('.wallet_type').on('change', function() {
+        //     wallet_id = $(this).val();
+        //     wallet(wallet_id);
+        // });
         function wallet(wallet_id){
             if(wallet_id) {
                 //console.log(typeof(wallet_id));
