@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Wallet;
 
 class DashboardController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('isWallet');
+    }
     public function index(){
         return view('dashboard.superadmin_dashboard');
     }

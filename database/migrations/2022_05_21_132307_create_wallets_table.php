@@ -16,7 +16,8 @@ class CreateWalletsTable extends Migration
         Schema::create('wallets', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('wallet_name');
-            $table->string('wallet_type')->default(1)->comment('1 => moneybag|Cash, 2=> Mobile Banking, 3 => Bank');
+            $table->string('wallet_type')->default(1)->comment('1 => moneybag|Cash, 2=> Bank, 3 => Mobile Banking');
+			$table->decimal('amount',10,2);
             $table->integer('mobile_bank_id')->nullable();
             $table->integer('bank_id')->nullable();
             $table->integer('user_id');
