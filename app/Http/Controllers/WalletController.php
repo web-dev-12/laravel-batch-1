@@ -11,7 +11,7 @@ class WalletController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('isWallet')->except(['create']);
+        $this->middleware('isWallet')->except(['create','store']);
     }
     /**
      * Display a listing of the resource.
@@ -31,15 +31,15 @@ class WalletController extends Controller
      */
     public function create()
     {
-        $wallet             = Wallet::select('wallet_type')->where('user_id','=',request()->session()->get('user'))->pluck('wallet_type');
+        $wallet             = Wallet::select('wallet_type')->where(['wallet_type' => 1,'user_id' => request()->session()->get('user')])->pluck('wallet_type')->toArray();
+        //dd($wallet);
         $bank_wallet        = Wallet::select('bank_id')->where(['wallet_type' => 2,'user_id'=> request()->session()->get('user')])->get();
         $mbk_wallet         = Wallet::select('mobile_bank_id')->where(['wallet_type' => 3,'user_id'=> request()->session()->get('user')])->get();
         
 
         $banks              = Bank::where('status','=', 1)->whereNotIn('id',$bank_wallet)->get();
         $mobile_bankings    = MobileBanking::where('status','=',1)->whereNotIn('id',$mbk_wallet)->get();
-        if(!$wallet)
-        $wallet = null;
+
         return view('wallets.add',compact('banks','mobile_bankings','wallet'));
     }
 
@@ -56,8 +56,8 @@ class WalletController extends Controller
             'wallet_name'       => 'required',
             'amount'            => 'required',
             'wallet_type'       => 'required',
-            'mobile_bank_id'    => 'required|unique:wallets,mobile_bank_id',
-            'bank_id'           => 'required|unique:wallets,bank_id',  
+            /*'mobile_bank_id'    => 'required|unique:wallets,mobile_bank_id',
+            'bank_id'           => 'required|unique:wallets,bank_id',  */
         ]);
         $wallet                 = new Wallet();
         $wallet->wallet_name    = $request->wallet_name;
