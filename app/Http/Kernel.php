@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'UnknownUser' => \App\Http\Middleware\UnknownUser::class,
         'isSuperAdmin' => \App\Http\Middleware\isSuperAdmin::class,
         'isUser' => \App\Http\Middleware\isUser::class,
+        'isWallet' => \App\Http\Middleware\isWallet::class,
     ];
 }
