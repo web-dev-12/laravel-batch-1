@@ -626,6 +626,18 @@
                         <ul aria-expanded="false">
                             <li><a href="{{route(currentUser().'.wallet.index')}}">Wallet List</a></li>
                             <li><a href="{{route(currentUser().'.wallet.create')}}">Add Wallet</a></li>
+                          
+                        </ul>
+                    </li>
+					@endif
+					@if(currentUser() == 'superadmin')
+                    <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+						<i class="fas fa-info-circle"></i>
+							<span class="nav-text">mobile Banking</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route(currentUser().'.mobilebanking.create')}}">Wallet List</a></li>
+                            
                         </ul>
                     </li>
 					@endif

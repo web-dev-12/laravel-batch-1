@@ -69,9 +69,9 @@ class AuthenticationController extends Controller
             'username'      => 'required|unique:users,username',
             'email'         => 'required',
             'mobileNumber'  => 'required',
-            'password'      => 'required',
+            'password'      => 'min:6|required_with:cpass|same:cpass',
+            'cpass'         => 'min:6'
         ]);
-
         $user                   = new User();
         $user->name             = $request->name;
         $user->username         = $request->username;
@@ -79,7 +79,7 @@ class AuthenticationController extends Controller
         $user->mobileNumber     = $request->mobileNumber;
         $user->password         = md5($request->password);
         $user->roleId           = 2;
-        
+        $user->status           = 1; 
         $user->save(); 
         
         return redirect(route('signInForm'))->with($this->responseMessage(true,null,'User Profile Created Successfully'));

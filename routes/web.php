@@ -9,6 +9,7 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\WalletController;
+use App\Http\Controllers\MobileBankingController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,10 +33,11 @@ Route::post('/registration',[AuthenticationController::class,'signUp'])->name('r
 Route::group(['middleware' => 'isSuperAdmin'],function(){
     Route::prefix('superadmin')->group(function(){
         Route::get('/dashboard',[DashboardController::class,'index'])->name('superadminDashboard');
+        Route::resource('/mobilebanking',MobileBankingController::class,["as" => "superadmin"]);
     });
 });
 
-/*Superadmin Group*/
+/*User Group*/
 Route::group(['middleware' => 'isUser'],function(){
     Route::prefix('user')->group(function(){
         Route::get('/dashboard',[DashboardController::class,'userindex'])->name('userDashboard');

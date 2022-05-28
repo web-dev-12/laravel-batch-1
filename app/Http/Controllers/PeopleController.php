@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MobileBanking;
+use App\Models\People;
 use Illuminate\Http\Request;
 
-class MobileBankingController extends Controller
+class PeopleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class MobileBankingController extends Controller
      */
     public function index()
     {
-        return view('mobiles.list_mbl');
+        //
     }
 
     /**
@@ -24,7 +24,7 @@ class MobileBankingController extends Controller
      */
     public function create()
     {
-        return view('mobiles.add_mbl');
+        //
     }
 
     /**
@@ -35,26 +35,16 @@ class MobileBankingController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'mbk_name'          => 'required',
-
-        ]);
-        $mobileBanking                   = new mobileBanking();
-        $mobileBanking->mbk_name             = $request->mbk_name;
-       
-        $mobileBanking->status           = 1; 
-        $mobileBanking->save(); 
-        
-        return redirect(route(currentUser().'.mobilebanking.index'));
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\MobileBanking  $mobileBanking
+     * @param  \App\Models\People  $people
      * @return \Illuminate\Http\Response
      */
-    public function show(MobileBanking $mobileBanking)
+    public function show(People $people)
     {
         //
     }
@@ -62,10 +52,10 @@ class MobileBankingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\MobileBanking  $mobileBanking
+     * @param  \App\Models\People  $people
      * @return \Illuminate\Http\Response
      */
-    public function edit(MobileBanking $mobileBanking)
+    public function edit(People $people)
     {
         //
     }
@@ -74,10 +64,10 @@ class MobileBankingController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\MobileBanking  $mobileBanking
+     * @param  \App\Models\People  $people
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MobileBanking $mobileBanking)
+    public function update(Request $request, People $people)
     {
         //
     }
@@ -85,10 +75,10 @@ class MobileBankingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\MobileBanking  $mobileBanking
+     * @param  \App\Models\People  $people
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MobileBanking $mobileBanking)
+    public function destroy(People $people)
     {
         //
     }
