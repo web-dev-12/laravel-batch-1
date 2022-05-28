@@ -1,5 +1,5 @@
 @extends('layout.auth')
-@section('title',"Wallet Login")
+@section('title',"Wallet Registration")
 @section('content')
     <div class="authincation h-100">
         <div class="container h-100">
@@ -14,7 +14,15 @@
                                     </div>
                                     
                                     <h4 class="text-center mb-4">Sign in your account</h4>
-                                    
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
                                     <form action="{{route('registration')}}" method="post">
                                         @csrf
                                         <div class="mb-3">
@@ -36,6 +44,10 @@
                                         <div class="mb-3">
                                             <label for="password" class="mb-1"><strong>Password</strong></label>
                                             <input type="password" name="password" id="password" class="form-control">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="password_confirm" class="mb-1"><strong>Confirm Password</strong></label>
+                                            <input type="password" name="password_confirm" id="password_confirm" class="form-control">
                                         </div>
                                         
                                         <div class="text-center">

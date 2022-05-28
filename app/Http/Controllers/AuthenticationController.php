@@ -65,11 +65,13 @@ class AuthenticationController extends Controller
     public function signUp(Request $request){    
 
         $request->validate([
-            'name'          => 'required',
-            'username'      => 'required|unique:users,username',
-            'email'         => 'required',
-            'mobileNumber'  => 'required',
-            'password'      => 'required',
+            'name'              => 'required',
+            'username'          => 'required|unique:users,username',
+            'email'             => 'required',
+            'mobileNumber'      => 'required',
+            'password'          => 'required',
+            'password'          => 'required',
+            'password_confirm'  => 'required|same:password'
         ]);
 
         $user                   = new User();
@@ -78,6 +80,7 @@ class AuthenticationController extends Controller
         $user->email            = $request->email;
         $user->mobileNumber     = $request->mobileNumber;
         $user->password         = md5($request->password);
+        
         $user->roleId           = 2;
         
         $user->save(); 

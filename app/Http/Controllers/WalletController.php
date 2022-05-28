@@ -134,4 +134,5 @@ class WalletController extends Controller
         $wallet->save();
         return redirect()->route(currentUser().'.wallet.index');
     }
+
 }
