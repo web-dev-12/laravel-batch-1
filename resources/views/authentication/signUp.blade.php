@@ -16,6 +16,7 @@
                                     <h4 class="text-center mb-4">Sign in your account</h4>
                                     @if ($errors->any())
 
+
                                     <div class="alert alert-danger">
                                         <ul>
                                             @foreach ($errors->all() as $error)
@@ -23,6 +24,7 @@
                                             @endforeach
                                         </ul>
                                     </div>
+
 
                                     @endif
                                     <form action="{{route('registration')}}" method="post">
@@ -54,6 +56,10 @@
                                         <div class="mb-3">
                                             <label for="password_confirm" class="mb-1"><strong>Confirm Password</strong></label>
                                             <input type="password" name="password_confirm" id="password_confirm" class="form-control">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="password" class="mb-1"><strong>Confirm Password</strong></label>
+                                            <input type="password" name="cpass" id="password" class="form-control">
                                         </div>
                                         
                                         <div class="text-center">

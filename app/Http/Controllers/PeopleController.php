@@ -14,8 +14,10 @@ class PeopleController extends Controller
      */
     public function index()
     {
+
         $peoples = People::orderBy('id', 'DESC')->get();
         return view('peoples.list',compact('peoples'));
+
     }
 
     /**
@@ -25,7 +27,9 @@ class PeopleController extends Controller
      */
     public function create()
     {
+
         return view('peoples.add');
+
     }
 
     /**
@@ -36,6 +40,7 @@ class PeopleController extends Controller
      */
     public function store(Request $request)
     {
+
         /*$request->validate([
             
         ]);*/
@@ -48,6 +53,7 @@ class PeopleController extends Controller
         $people->user_id        = request()->session()->get('user');
         $people->save(); 
         return redirect()->route(currentUser().'.people.index');
+
     }
 
     /**
@@ -67,6 +73,7 @@ class PeopleController extends Controller
      * @param  \App\Models\People  $people
      * @return \Illuminate\Http\Response
      */
+
     public function edit($id)
     {
         $people = People::find($id);
@@ -80,6 +87,7 @@ class PeopleController extends Controller
      * @param  \App\Models\People  $people
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, $id)
     {
         $people                 = People::find($id);
