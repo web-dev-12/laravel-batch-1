@@ -42,7 +42,7 @@ class PeopleController extends Controller
         $people                 = new People();
         $people->p_name         = $request->p_name;
         $people->phone          = $request->phone;
-        $people->due_amount     = $request->phone;
+        $people->due_amount     = $request->due_amount;
         $people->type           = $request->type;
         $people->note           = $request->note;
         $people->user_id        = request()->session()->get('user');
@@ -85,7 +85,7 @@ class PeopleController extends Controller
         $people                 = People::find($id);
         $people->p_name         = $request->p_name;
         $people->phone          = $request->phone;
-        $people->due_amount     = $request->phone;
+        $people->due_amount     = $request->due_amount;
         $people->type           = $request->type;
         $people->note           = $request->note;
         $people->user_id        = request()->session()->get('user');
