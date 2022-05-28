@@ -9,7 +9,7 @@ class DashboardController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('isWallet');
+        $this->middleware('isWallet')->except(['index']);
     }
     public function index(){
         return view('dashboard.superadmin_dashboard');
