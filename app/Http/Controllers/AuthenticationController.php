@@ -56,6 +56,35 @@ class AuthenticationController extends Controller
             'roleIdentity'  => $user->roleIdentity
         ]);
     }
+
+    public function signUpForm(){
+        return view('authentication.signUp');
+    }
+
+
+    public function signUp(Request $request){    
+
+        $request->validate([
+            'name'          => 'required',
+            'username'      => 'required|unique:users,username',
+            'email'         => 'required',
+            'mobileNumber'  => 'required',
+            'password'      => 'required',
+        ]);
+
+        $user                   = new User();
+        $user->name             = $request->name;
+        $user->username         = $request->username;
+        $user->email            = $request->email;
+        $user->mobileNumber     = $request->mobileNumber;
+        $user->password         = md5($request->password);
+        $user->roleId           = 2;
+        
+        $user->save(); 
+        
+        return redirect(route('signInForm'))->with($this->responseMessage(true,null,'User Profile Created Successfully'));
+    }
+
     public function signOut(){
         request()->session()->flush();
         return redirect(route('signInForm'))->with($this->responseMessage(true,'error','Logged Out Successfully!'));

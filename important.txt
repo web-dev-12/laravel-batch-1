@@ -1,7 +1,9 @@
 All Collections Method Link
 https://laravel.com/docs/9.x/collections
+
 Faker class
 https://github.com/fzaninotto/Faker
+
 Generate Phone Number
 https://phone-number-generator.datagemba.com/bangladesh
 

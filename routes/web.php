@@ -25,6 +25,8 @@ Route::group(['middleware' => 'UnknownUser'],function(){
     Route::post('/login',[AuthenticationController::class,'signIn'])->name('logIn');
 });
 Route::get('/logout',[AuthenticationController::class,'signOut'])->name('logOut');
+Route::get('/registration_form',[AuthenticationController::class,'signUpForm'])->name('registration_form');
+Route::post('/registration',[AuthenticationController::class,'signUp'])->name('registration');
 
 /*Superadmin Group*/
 Route::group(['middleware' => 'isSuperAdmin'],function(){

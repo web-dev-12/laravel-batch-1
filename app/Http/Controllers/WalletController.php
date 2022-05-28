@@ -127,8 +127,11 @@ class WalletController extends Controller
      * @param  \App\Models\Wallet  $wallet
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Wallet $wallet)
+    public function destroy($id)
     {
-        //
+        $wallet = Wallet::find($id);
+        $wallet->status = 2;
+        $wallet->save();
+        return redirect()->route(currentUser().'.wallet.index');
     }
 }
