@@ -63,14 +63,16 @@ class AuthenticationController extends Controller
 
 
     public function signUp(Request $request){    
-
         $request->validate([
-            'name'          => 'required',
-            'username'      => 'required|unique:users,username',
-            'email'         => 'required',
-            'mobileNumber'  => 'required',
-            'password'      => 'min:6|required_with:cpass|same:cpass',
-            'cpass'         => 'min:6'
+
+
+            'name'                  => 'required',
+            'username'              => 'required|unique:users,username',
+            'email'                 => 'required|unique:users,email',
+            'mobileNumber'          => 'required|numeric|digits:11',
+            'password'              => 'min:6|required_with:password_confirmation|same:password_confirmation',
+            'password_confirmation' => 'min:6'
+
         ]);
         $user                   = new User();
         $user->name             = $request->name;
@@ -78,10 +80,12 @@ class AuthenticationController extends Controller
         $user->email            = $request->email;
         $user->mobileNumber     = $request->mobileNumber;
         $user->password         = md5($request->password);
-        $user->roleId           = 2;
-        $user->status           = 1; 
-        $user->save(); 
+
         
+        $user->roleId           = 2;
+        $user->status           = 1;
+
+        $user->save(); 
         return redirect(route('signInForm'))->with($this->responseMessage(true,null,'User Profile Created Successfully'));
     }
 

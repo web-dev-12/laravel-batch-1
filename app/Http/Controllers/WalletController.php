@@ -6,6 +6,7 @@ use App\Models\Wallet;
 use App\Models\Bank;
 use App\Models\MobileBanking;
 use Illuminate\Http\Request;
+use Session;
 
 class WalletController extends Controller
 {
@@ -20,7 +21,8 @@ class WalletController extends Controller
      */
     public function index()
     {
-        $wallets = Wallet::orderBy('id', 'DESC')->get();
+
+        $wallets = Wallet::where('user_id','=',Session::get('user'))->orderBy('id', 'DESC')->get();
         return view('wallets.list',compact('wallets'));
     }
 
@@ -134,4 +136,5 @@ class WalletController extends Controller
         $wallet->save();
         return redirect()->route(currentUser().'.wallet.index');
     }
+
 }

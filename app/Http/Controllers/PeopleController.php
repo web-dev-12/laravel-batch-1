@@ -14,7 +14,10 @@ class PeopleController extends Controller
      */
     public function index()
     {
-        //
+
+        $peoples = People::orderBy('id', 'DESC')->get();
+        return view('peoples.list',compact('peoples'));
+
     }
 
     /**
@@ -24,7 +27,9 @@ class PeopleController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('peoples.add');
+
     }
 
     /**
@@ -35,7 +40,20 @@ class PeopleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        /*$request->validate([
+            
+        ]);*/
+        $people                 = new People();
+        $people->p_name         = $request->p_name;
+        $people->phone          = $request->phone;
+        $people->due_amount     = $request->due_amount;
+        $people->type           = $request->type;
+        $people->note           = $request->note;
+        $people->user_id        = request()->session()->get('user');
+        $people->save(); 
+        return redirect()->route(currentUser().'.people.index');
+
     }
 
     /**
@@ -55,9 +73,11 @@ class PeopleController extends Controller
      * @param  \App\Models\People  $people
      * @return \Illuminate\Http\Response
      */
-    public function edit(People $people)
+
+    public function edit($id)
     {
-        //
+        $people = People::find($id);
+        return view('peoples.edit',compact('people'));
     }
 
     /**
@@ -67,9 +87,18 @@ class PeopleController extends Controller
      * @param  \App\Models\People  $people
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, People $people)
+
+    public function update(Request $request, $id)
     {
-        //
+        $people                 = People::find($id);
+        $people->p_name         = $request->p_name;
+        $people->phone          = $request->phone;
+        $people->due_amount     = $request->due_amount;
+        $people->type           = $request->type;
+        $people->note           = $request->note;
+        $people->user_id        = request()->session()->get('user');
+        $people->save(); 
+        return redirect()->route(currentUser().'.people.index');
     }
 
     /**

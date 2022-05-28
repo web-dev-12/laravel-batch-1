@@ -9,7 +9,12 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\WalletController;
+
 use App\Http\Controllers\MobileBankingController;
+
+use App\Http\Controllers\PeopleController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,6 +47,7 @@ Route::group(['middleware' => 'isUser'],function(){
     Route::prefix('user')->group(function(){
         Route::get('/dashboard',[DashboardController::class,'userindex'])->name('userDashboard');
         Route::resource('/wallet',WalletController::class,["as" => "user"]);
+        Route::resource('/people',PeopleController::class,["as" => "user"]);
     });
 });
 

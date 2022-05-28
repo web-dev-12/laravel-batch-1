@@ -640,6 +640,15 @@
                             
                         </ul>
                     </li>
+					<li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+						<i class="fas fa-person-circle"></i>
+							<span class="nav-text">People</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route(currentUser().'.people.index')}}">People List</a></li>
+                            <li><a href="{{route(currentUser().'.people.create')}}">Add People</a></li>
+                        </ul>
+                    </li>
 					@endif
                 </ul>
 
