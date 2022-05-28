@@ -29,10 +29,18 @@
                         <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$wallet->wallet_name}}</td>
-                            <td>{{$wallet->wallet_type}}</td>
+                            <td>
+                                @if($wallet->wallet_type==1)
+                                Cash|Moneybag
+                                @elseif($wallet->wallet_type==2)
+                                Bank
+                                @else
+                                Mobile Banking
+                                @endif
+                            </td>
                             <td>{{$wallet->amount}}</td>
-                            <td>{{$wallet->mobile_bank_id}}</td>
-                            <td>{{$wallet->bank_id}}</td>
+                            <td>{{optional($wallet->mobilebankings)->mbk_name}}</td>
+                            <td>{{optional($wallet->banks)->bank_name}}</td>
                             <td>
                                 @if($wallet->status ==1)
                                 <span class="badge light badge-success">
@@ -49,7 +57,11 @@
                             <td>
                                 <div class="d-flex">
                                     <a href="{{route(currentUser().'.wallet.edit',$wallet->id)}}" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-                                    <a href="{{route(currentUser().'.wallet.destroy',$wallet->id)}}" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                    <form action="{{route(currentUser().'.wallet.destroy',$wallet->id)}}" method="POST">
+                                    @method('DELETE')    
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
