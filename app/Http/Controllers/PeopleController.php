@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\People;
 use Illuminate\Http\Request;
+use Session;
 
 class PeopleController extends Controller
 {
@@ -15,7 +16,7 @@ class PeopleController extends Controller
     public function index()
     {
 
-        $peoples = People::orderBy('id', 'DESC')->get();
+        $peoples = People::where('user_id','=',Session::get('user'))->orderBy('id', 'DESC')->get();
         return view('peoples.list',compact('peoples'));
 
     }
@@ -107,8 +108,11 @@ class PeopleController extends Controller
      * @param  \App\Models\People  $people
      * @return \Illuminate\Http\Response
      */
-    public function destroy(People $people)
+    public function destroy($id)
     {
-        //
+        $people = People::find($id);
+        $people->status = 2;
+        $people->save();
+        return redirect()->route(currentUser().'.people.index');
     }
 }

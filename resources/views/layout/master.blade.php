@@ -620,7 +620,7 @@
                     </li>
 					@if(currentUser() == 'user')
                     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-						<i class="fas fa-info-circle"></i>
+						<i class="fas fa-money-check-alt"></i>
 							<span class="nav-text">Wallet</span>
 						</a>
                         <ul aria-expanded="false">
@@ -629,24 +629,24 @@
                           
                         </ul>
                     </li>
-					@endif
-					@if(currentUser() == 'superadmin')
-                    <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-						<i class="fas fa-info-circle"></i>
-							<span class="nav-text">mobile Banking</span>
-						</a>
-                        <ul aria-expanded="false">
-                            <li><a href="{{route(currentUser().'.mobilebanking.create')}}">Wallet List</a></li>
-                            
-                        </ul>
-                    </li>
 					<li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-						<i class="fas fa-person-circle"></i>
+						<i class="fas fa-user"></i>
 							<span class="nav-text">People</span>
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="{{route(currentUser().'.people.index')}}">People List</a></li>
-                            <li><a href="{{route(currentUser().'.people.create')}}">Add People</a></li>
+                            <li><a href="{{route(currentUser().'.people.index')}}"></i>People List</a></li>
+                            <li><a href="{{route(currentUser().'.people.create')}}"></i>Add People</a></li>
+                        </ul>
+                    </li>
+					@endif
+					@if(currentUser() == 'superadmin')
+                    <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+						<i class="fas fa-mobile"></i>
+							<span class="nav-text">Mobile Banking</span>
+						</a>
+                        <ul aria-expanded="false">
+							<li><a href="{{route(currentUser().'.mobilebanking.index')}}">Mobile Banking List</a></li>
+                            <li><a href="{{route(currentUser().'.mobilebanking.create')}}">Add Mobile Banking</a></li> 
                         </ul>
                     </li>
 					@endif
@@ -654,8 +654,8 @@
 
 				
 				<div class="copyright">
-					<p><strong>Fillow Saas Admin</strong> © 2021 All Rights Reserved</p>
-					<p class="fs-12">Made with <span class="heart"></span> by DexignLabs</p>
+					<p><strong>NVIT</strong> © 2022 All Rights Reserved</p>
+					<p class="fs-12">Made with <span class="heart"></span> by Batch-1</p>
 				</div>
 			</div>
         </div>

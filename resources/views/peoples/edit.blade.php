@@ -36,9 +36,9 @@
                                             <div class="mb-3 col-md-12">
                                                     <label for="type" class="form-label"><strong>Type</strong></label>
                                                     <select id="type" class="default-select form-control wide" name="type" value="{{$people->type}}">
-                                                        <option selected="">Choose...</option>
-                                                        <option value="1">Debitors</option>
-                                                        <option value="2">Creditors</option>
+                                                        <option value="0" selected>Choose...</option>
+                                                        <option value="1" @if($people->type == 1) selected @endif>Debitors</option>
+                                                        <option value="2" @if($people->type == 2) selected @endif>Creditors</option>
                                                     </select>
                                             </div>
                                         </div>

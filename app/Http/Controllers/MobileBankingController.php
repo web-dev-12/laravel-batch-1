@@ -13,8 +13,9 @@ class MobileBankingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('mobiles.list_mbl');
+    {   
+        $mbks = MobileBanking::all();   
+        return view('mobiles.list_mbl',compact('mbks'));
     }
 
     /**
