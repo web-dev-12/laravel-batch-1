@@ -52,16 +52,7 @@
                                         <div class="mb-3">
                                             <label for="password_confirmation" class="mb-1"><strong>Confrim Password</strong></label>
                                             <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" value="{{old('password_confirmation')}}">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="password_confirm" class="mb-1"><strong>Confirm Password</strong></label>
-                                            <input type="password" name="password_confirm" id="password_confirm" class="form-control">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="password" class="mb-1"><strong>Confirm Password</strong></label>
-                                            <input type="password" name="cpass" id="password" class="form-control">
-                                        </div>
-                                        
+                                        </div>                                       
                                         <div class="text-center">
                                             <button type="submit" class="btn btn-primary btn-block">Register</button>
                                         </div>

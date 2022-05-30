@@ -31,7 +31,12 @@
                             <td>{{$people->p_name}}</td>
                             <td>{{$people->phone}}</td>
                             <td>{{$people->due_amount}}</td>
-                            <td>{{$people->type}}</td>
+                            <td>@if($people->type==1)
+                                Debitors
+                                @elseif($people->type==2)
+                                Creditors
+                                @else
+                                @endif</td>
                             <td>{{$people->note}}</td>
                             <td>
                                 @if($people->status ==1)
@@ -49,7 +54,11 @@
                             <td>
                                 <div class="d-flex">
                                     <a href="{{route(currentUser().'.people.edit',$people->id)}}" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-                                    <a href="{{route(currentUser().'.people.destroy',$people->id)}}" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                    <form action="{{route(currentUser().'.people.destroy',$people->id)}}" method="POST">
+                                    @method('DELETE')    
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
