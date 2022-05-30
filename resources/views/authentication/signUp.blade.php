@@ -12,7 +12,17 @@
                                     <div class="text-center mb-3">
                                         <a href="index.html"><img src="images/logo-full.png" alt=""></a>
                                     </div>
-                                    
+                                 
+
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
                                     <h4 class="text-center mb-4">Sign in your account</h4>
                                     
                                     <form action="{{route('registration')}}" method="post">
