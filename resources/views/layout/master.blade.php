@@ -649,6 +649,16 @@
                             <li><a href="{{route(currentUser().'.mobilebanking.create')}}">Add Mobile Banking</a></li> 
                         </ul>
                     </li>
+
+                    <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+						<i class="fas fa-mobile"></i>
+							<span class="nav-text">Income List</span>
+						</a>
+                        <ul aria-expanded="false">
+							<li><a href="{{route(currentUser().'.income.index')}}">Income List</a></li>
+                            <li><a href="{{route(currentUser().'.income.create')}}">Add Income</a></li> 
+                        </ul>
+                    </li>
 					@endif
                 </ul>
 
