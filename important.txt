@@ -20,3 +20,5 @@ Schema::create('user_wallet', function (Blueprint $table) {
 
 /*To Delete Recent Merge*/
 git reset --merge HEAD~1 
+/*To Force push */
+git push -f origin main 

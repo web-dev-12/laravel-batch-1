@@ -13,8 +13,9 @@ class ExpenseCategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {   $expenses = ExpenseCategory::orderBy('id','DESC')->get();
+        return view('expense/list_expense',compact('expenses'));
+        
     }
 
     /**
@@ -23,8 +24,9 @@ class ExpenseCategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    { 
+
+        return view('expense/add_expense');
     }
 
     /**
@@ -35,7 +37,12 @@ class ExpenseCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $expense_cat = new ExpenseCategory();
+        $expense_cat->expense_cat = $request->expense_cat;
+        $expense_cat->status = 1;
+        $expense_cat->save();
+        return redirect(route(currentUser().'.expense.index'));
+
     }
 
     /**
@@ -46,7 +53,7 @@ class ExpenseCategoryController extends Controller
      */
     public function show(ExpenseCategory $expenseCategory)
     {
-        //
+        
     }
 
     /**
@@ -55,9 +62,10 @@ class ExpenseCategoryController extends Controller
      * @param  \App\Models\ExpenseCategory  $expenseCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(ExpenseCategory $expenseCategory)
+    public function edit($id)
     {
-        //
+         $edit_expense = ExpenseCategory::find($id);
+         return view ('expense/edit_expense',compact('edit_expense'));
     }
 
     /**
@@ -67,9 +75,12 @@ class ExpenseCategoryController extends Controller
      * @param  \App\Models\ExpenseCategory  $expenseCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ExpenseCategory $expenseCategory)
+    public function update(Request $request, $id)
     {
-        //
+        $update_expense = ExpenseCategory::find($id);
+        $update_expense->expense_cat = $request->expense_cat;
+        $update_expense->save();
+        return redirect(route(currentUser().'.expense.index'));
     }
 
     /**
@@ -78,8 +89,11 @@ class ExpenseCategoryController extends Controller
      * @param  \App\Models\ExpenseCategory  $expenseCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ExpenseCategory $expenseCategory)
+    public function destroy($id)
     {
-        //
+        $inactive = ExpenseCategory::find($id);
+        $inactive->status = 2;
+        $inactive->save();
+        return redirect(route(currentUser().'.expense.index'));
     }
 }

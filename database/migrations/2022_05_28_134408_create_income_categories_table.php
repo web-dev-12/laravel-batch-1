@@ -14,7 +14,9 @@ class CreateIncomeCategoriesTable extends Migration
     public function up()
     {
         Schema::create('income_categories', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->string('income_name');
+            $table->string('status')->comment('0 => Inactive, 1 => active');
             $table->timestamps();
         });
     }

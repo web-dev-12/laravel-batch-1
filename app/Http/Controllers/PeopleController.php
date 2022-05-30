@@ -15,7 +15,6 @@ class PeopleController extends Controller
      */
     public function index()
     {
-
         $peoples = People::where('user_id','=',Session::get('user'))->orderBy('id', 'DESC')->get();
         return view('peoples.list',compact('peoples'));
 
@@ -28,9 +27,7 @@ class PeopleController extends Controller
      */
     public function create()
     {
-
         return view('peoples.add');
-
     }
 
     /**

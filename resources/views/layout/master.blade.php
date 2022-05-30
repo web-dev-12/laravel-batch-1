@@ -638,6 +638,15 @@
                             <li><a href="{{route(currentUser().'.people.create')}}"></i>Add People</a></li>
                         </ul>
                     </li>
+					<li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+						<i class="fas fa-user"></i>
+							<span class="nav-text">Transaction</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route(currentUser().'.transaction.index')}}"></i>Tranaction List</a></li>
+                            <li><a href="{{route(currentUser().'.transaction.create')}}"></i>Add Transaction</a></li>
+                        </ul>
+                    </li>
 					@endif
 					@if(currentUser() == 'superadmin')
                     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
@@ -647,6 +656,25 @@
                         <ul aria-expanded="false">
 							<li><a href="{{route(currentUser().'.mobilebanking.index')}}">Mobile Banking List</a></li>
                             <li><a href="{{route(currentUser().'.mobilebanking.create')}}">Add Mobile Banking</a></li> 
+                        </ul>
+                    </li>
+					<li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+						<i class="fas fa-info-circle"></i>
+							<span class="nav-text">Expense Category</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route(currentUser().'.expense.index')}}">List Expense Category</a></li>
+							<li><a href="{{route(currentUser().'.expense.create')}}">Add Expense Category</a></li>
+                           
+                        </ul>
+                    </li>
+					<li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+						<i class="fas fa-mobile"></i>
+							<span class="nav-text">Income List</span>
+						</a>
+                        <ul aria-expanded="false">
+							<li><a href="{{route(currentUser().'.income.index')}}">Income List</a></li>
+                            <li><a href="{{route(currentUser().'.income.create')}}">Add Income</a></li> 
                         </ul>
                     </li>
 					@endif

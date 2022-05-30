@@ -15,6 +15,8 @@ class CreateExpenseCategoriesTable extends Migration
     {
         Schema::create('expense_categories', function (Blueprint $table) {
             $table->id();
+            $table->string('expense_cat');
+            $table->tinyInteger('status')->default(1)->comment("1 => active, 0 => inactive ");
             $table->timestamps();
         });
     }

@@ -15,6 +15,8 @@ class IncomeCategoryController extends Controller
     public function index()
     {
         //
+        $incomes = IncomeCategory::all();
+        return view('incomes.list',compact('incomes'));
     }
 
     /**
@@ -25,6 +27,7 @@ class IncomeCategoryController extends Controller
     public function create()
     {
         //
+        return view('incomes.add');
     }
 
     /**
@@ -36,6 +39,11 @@ class IncomeCategoryController extends Controller
     public function store(Request $request)
     {
         //
+        $income = new IncomeCategory();
+        $income->income_name = $request->income_name;
+        $income->status = 1;
+        $income->save();
+        return redirect(route(currentUser().'.income.index'));
     }
 
     /**
@@ -55,9 +63,11 @@ class IncomeCategoryController extends Controller
      * @param  \App\Models\IncomeCategory  $incomeCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(IncomeCategory $incomeCategory)
+    public function edit($id)
     {
         //
+        $single_income = IncomeCategory::find($id);
+        return view('incomes.edit',compact('single_income'));
     }
 
     /**
@@ -67,9 +77,13 @@ class IncomeCategoryController extends Controller
      * @param  \App\Models\IncomeCategory  $incomeCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, IncomeCategory $incomeCategory)
+    public function update(Request $request, $id)
     {
         //
+        $income = IncomeCategory::find($id);
+        $income->income_name = $request->income_name;
+        $income->save();
+        return redirect(route(currentUser().'.income.index'));
     }
 
     /**
@@ -78,8 +92,13 @@ class IncomeCategoryController extends Controller
      * @param  \App\Models\IncomeCategory  $incomeCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(IncomeCategory $incomeCategory)
+    public function destroy($id)
     {
         //
+        $income = IncomeCategory::find($id);
+        $income->status = 0;
+        $income->save(); 
+        return redirect(route(currentUser().'.income.index'));
+
     }
 }

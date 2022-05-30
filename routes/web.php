@@ -9,12 +9,11 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\WalletController;
-
 use App\Http\Controllers\MobileBankingController;
-
 use App\Http\Controllers\PeopleController;
-
-
+use App\Http\Controllers\ExpenseCategoryController;
+use App\Http\Controllers\IncomeCategoryController;
+use App\Http\Controllers\TransactionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +38,8 @@ Route::group(['middleware' => 'isSuperAdmin'],function(){
     Route::prefix('superadmin')->group(function(){
         Route::get('/dashboard',[DashboardController::class,'index'])->name('superadminDashboard');
         Route::resource('/mobilebanking',MobileBankingController::class,["as" => "superadmin"]);
+        Route::resource('/expense',ExpenseCategoryController::class,["as" => "superadmin"]);
+        Route::resource('/income',IncomeCategoryController::class,['as' => 'superadmin']);
     });
 });
 
@@ -48,6 +49,7 @@ Route::group(['middleware' => 'isUser'],function(){
         Route::get('/dashboard',[DashboardController::class,'userindex'])->name('userDashboard');
         Route::resource('/wallet',WalletController::class,["as" => "user"]);
         Route::resource('/people',PeopleController::class,["as" => "user"]);
+        Route::resource('/transaction',TransactionController::class,["as" => "user"]);
     });
 });
 
