@@ -13,8 +13,9 @@ class MobileBankingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {   
+        $mbks = MobileBanking::all();   
+        return view('mobiles.list_mbl',compact('mbks'));
     }
 
     /**
@@ -24,7 +25,7 @@ class MobileBankingController extends Controller
      */
     public function create()
     {
-        //
+        return view('mobiles.add_mbl');
     }
 
     /**
@@ -35,7 +36,17 @@ class MobileBankingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'mbk_name'          => 'required',
+
+        ]);
+        $mobileBanking                   = new mobileBanking();
+        $mobileBanking->mbk_name             = $request->mbk_name;
+       
+        $mobileBanking->status           = 1; 
+        $mobileBanking->save(); 
+        
+        return redirect(route(currentUser().'.mobilebanking.index'));
     }
 
     /**

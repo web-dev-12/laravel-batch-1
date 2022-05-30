@@ -13,9 +13,9 @@ class ExpenseCategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+
     {   $expenses =ExpenseCategory::orderBy('id','DESC')->get();
         return view('expense/list_expense',compact('expenses'));
-        
     }
 
     /**
@@ -25,7 +25,6 @@ class ExpenseCategoryController extends Controller
      */
     public function create()
     { 
-
         return view('expense/add_expense');
     }
 
@@ -42,7 +41,6 @@ class ExpenseCategoryController extends Controller
         $expense_cat->status = 1;
         $expense_cat->save();
         return redirect(route(currentUser().'.expense.index'));
-
     }
 
     /**
@@ -52,8 +50,7 @@ class ExpenseCategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(ExpenseCategory $expenseCategory)
-    {
-        
+    { 
     }
 
     /**
@@ -62,6 +59,7 @@ class ExpenseCategoryController extends Controller
      * @param  \App\Models\ExpenseCategory  $expenseCategory
      * @return \Illuminate\Http\Response
      */
+
     public function edit($id)
     {
          $edit_expense = ExpenseCategory::find($id);
