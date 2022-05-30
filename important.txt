@@ -17,3 +17,6 @@ Schema::create('user_wallet', function (Blueprint $table) {
             $table->integer('user_id');
             $table->timestamps();
         });
+
+/*To Delete Recent Merge*/
+git reset --merge HEAD~1 
