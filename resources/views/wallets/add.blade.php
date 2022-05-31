@@ -35,12 +35,7 @@
                                                     <option value="3">Mobile Banking</option>
                                                 </select>
                                             </div>
-                                            <div class="mb-3 col-md-4">
-                                                <label class="form-label">Amount</label>
-                                                <input type="text" name="amount" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="row">
+                                            
                                             <div class="mb-3 col-md-4 bank">
                                                 <label class="form-label">Select Bank</label>
                                                 <select id="" class="default-select form-control wide" name="bank_id">
@@ -60,6 +55,13 @@
                                                     @empty
                                                     @endforelse
                                                 </select>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="mb-3 col-md-4">
+                                                    <label class="form-label">Amount</label>
+                                                    <input type="text" name="amount" class="form-control">
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-block">Add Wallet</button>

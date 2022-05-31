@@ -650,7 +650,7 @@
 					@endif
 					@if(currentUser() == 'superadmin')
                     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-						<i class="fas fa-mobile"></i>
+						<i class="fas fa-mobile-alt"></i>
 							<span class="nav-text">Mobile Banking</span>
 						</a>
                         <ul aria-expanded="false">
@@ -659,7 +659,7 @@
                         </ul>
                     </li>
 					<li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-						<i class="fas fa-info-circle"></i>
+						<i class="fab fa-cc-visa"></i>
 							<span class="nav-text">Expense Category</span>
 						</a>
                         <ul aria-expanded="false">
@@ -669,8 +669,8 @@
                         </ul>
                     </li>
 					<li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-						<i class="fas fa-mobile"></i>
-							<span class="nav-text">Income List</span>
+						<i class="fas fa-coins"></i>
+							<span class="nav-text">Income Category</span>
 						</a>
                         <ul aria-expanded="false">
 							<li><a href="{{route(currentUser().'.income.index')}}">Income List</a></li>

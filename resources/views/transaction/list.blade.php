@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title','Wallet List')
+@section('title','Transaction List')
 @push('styles')
     <!-- Datatable -->
     <link href="{{asset('/')}}assets/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -7,57 +7,64 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <h4 class="card-title">Wallet List</h4>
+        <h4 class="card-title">Transaction List</h4>
     </div>
     <div class="card-body">
         <div class="table-responsive">
-                <table id="example3" class="display" style="min-width: 845px">
+                <table id="example3" class="display text-center" style="min-width: 845px">
                     <thead>
                         <tr>
                             <th>Sl.</th>
-                            <th>Name</th>
+                            <th>Date</th>
                             <th>Type</th>
+                            <th>Income Category</th>
+                            <th>Expense Category</th>
+                            <th>Medium</th>
+                            <th>Bank || Mobile Bank Name</th>
+                            <th>People</th>
                             <th>Amount</th>
-                            <th>Mobile Bank</th>
-                            <th>Bank</th>
-                            <th>Status</th>
+                            <th>Note</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($wallets as $wallet)
+                        @forelse($transactions as $transaction)
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{$wallet->wallet_name}}</td>
+                            <td>{{$transaction->trans_date}}</td>
                             <td>
-                                @if($wallet->wallet_type==1)
-                                Cash|Moneybag
-                                @elseif($wallet->wallet_type==2)
+                                @if($transaction->trans_type==1)
+                                Income
+                                @elseif($transaction->trans_type==2)
+                                Expense
+                                @endif
+                            </td>
+                            <td>{{optional($transaction->incomes)->income_name}}</td>
+                            <td>{{optional($transaction->expenses)->expense_cat}}</td>
+                            <td>
+                                @if($transaction->source_id==1)
+                                Cash | Moneybag
+                                @elseif($transaction->source_id==2)
                                 Bank
-                                @else
-                                Mobile Banking
+                                @elseif($transaction->source_id==3)
+                                Mobile Bank
                                 @endif
                             </td>
-                            <td>{{$wallet->amount}}</td>
-                            <td>{{optional($wallet->mobilebankings)->mbk_name}}</td>
-                            <td>{{optional($wallet->banks)->bank_name}}</td>
+                            <td>@if($transaction->source_id==2)
+                                {{optional($transaction->banks)->bank_name}}
+                                @elseif($transaction->source_id==3)
+                                {{optional($transaction->mobilebankings)->mbk_name}}
+                                @endif
+                            </td>
                             <td>
-                                @if($wallet->status ==1)
-                                <span class="badge light badge-success">
-                                    <i class="fa fa-circle text-success me-1"></i>
-                                    Active
-                                </span>
-                                @else
-                                <span class="badge light badge-danger">
-                                    <i class="fa fa-circle text-danger me-1"></i>
-                                   Inactive
-                                </span>
-                                @endif
+                                {{optional($transaction->peoples)->p_name}}
                             </td>
+                            <td>{{$transaction->amount}}</td>
+                            <td>{{$transaction->note}}</td>
                             <td>
                                 <div class="d-flex">
-                                    <a href="{{route(currentUser().'.wallet.edit',$wallet->id)}}" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-                                    <form action="{{route(currentUser().'.wallet.destroy',$wallet->id)}}" method="POST">
+                                    <a href="{{route(currentUser().'.transaction.edit',$transaction->id)}}" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
+                                    <form action="{{route(currentUser().'.transaction.destroy',$transaction->id)}}" method="POST">
                                     @method('DELETE')    
                                     @csrf
                                     <button type="submit" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></button>

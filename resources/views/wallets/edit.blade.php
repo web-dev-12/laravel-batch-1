@@ -62,7 +62,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary btn-block">Add Wallet</button>
+                                        <button type="submit" class="btn btn-primary btn-block">Update Wallet</button>
                                     </form>
                                 </div>
                             </div>

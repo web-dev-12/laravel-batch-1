@@ -20,28 +20,48 @@
                                     <form method="post" action="{{route(currentUser().'.transaction.store')}}">
                                         @csrf
                                         <div class="row">
-                                            <div class="mb-3 col-md-4">
-                                                <label class="form-label">Name</label>
-                                                <input type="text" name="wallet_name" class="form-control">
+                                            <div class="mb-3 col-md-6">
+                                                <label for="trans_type" class="form-label"><strong>Trasnsaction Type</strong></label>
+                                                <select name="trans_type" id="" class="default-select form-control wide trans_type">
+                                                    <option selected><strong>Choose.....</strong></option>
+                                                    <option value="1">Income</option>
+                                                    <option value="2">Expense</option>
+                                                </select>
                                             </div>
-                                            <div class="mb-3 col-md-4">
-                                                <label class="form-label">Select Wallet Type</label>
-                                                <select id="" class="default-select form-control wide wallet_type" name="wallet_type">
-                                                    <option selected="">Choose...</option>
-                                                    <option value="1">Cash|Moneybag</option>
+                                            <div class="mb-3 col-md-6 income">
+                                                <label for="in_cat" class="form-label"><strong>Select Income</strong></label>
+                                                <select id="in_cat" class="default-select form-control wide" name="in_cat">
+                                                    <option value="0" selected>Choose...</option>
+                                                    @forelse($all_income_cat as $income)
+                                                    <option value="{{$income->id}}">{{$income->income_name}}</option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                            </div>
+                                            <div class="mb-3 col-md-6 expense">
+                                                <label for="exp_cat" class="form-label"><strong>Select Expense</strong></label>
+                                                <select id="exp_cat" class="default-select form-control wide" name="exp_cat">
+                                                    <option value="0" selected>Choose...</option>
+                                                    @forelse($all_exp_cat as $expense)
+                                                    <option value="{{$expense->id}}">{{$expense->expense_cat}}</option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">    
+                                            <div class="mb-3 col-md-6">
+                                                <label for="source_id" class="form-label"><strong>Select Medium</strong></label>
+                                                <select id="source_id" class="default-select form-control wide wallet_type" name="source_id">
+                                                    <option selected><strong>Choose.....</strong></option>
                                                     <option value="2">Bank</option>
                                                     <option value="3">Mobile Banking</option>
                                                 </select>
                                             </div>
-                                            <div class="mb-3 col-md-4">
-                                                <label class="form-label">Amount</label>
-                                                <input type="text" name="amount" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="mb-3 col-md-4 bank">
-                                                <label class="form-label">Select Bank</label>
-                                                <select id="" class="default-select form-control wide" name="bank_id">
+                                            <div class="mb-3 col-md-6 bank">
+                                                <label for="source_cat_id" class="form-label"><strong>Select Bank</strong></label>
+                                                <select id="source_cat_id" class="default-select form-control wide" name="source_cat_id">
                                                     <option value="0" selected>Choose...</option>
                                                     @forelse($banks as $bank)
                                                     <option value="{{$bank->id}}">{{$bank->bank_name}}</option>
@@ -49,9 +69,9 @@
                                                     @endforelse
                                                 </select>
                                             </div>
-                                            <div class="mb-3 col-md-4 mobile_bank">
-                                                <label class="form-label">Select Mobile Banking</label>
-                                                <select id="" class="default-select form-control wide" name="mobile_bank_id">
+                                            <div class="mb-3 col-md-6 mobile_bank">
+                                                <label for="source_cat_id" class="form-label"><strong>Select Mobile Banking</strong></label>
+                                                <select id="source_cat_id" class="default-select form-control wide" name="source_cat_id">
                                                     <option value="0" selected>Choose...</option>
                                                     @forelse($mobile_bankings as $mbk)
                                                     <option value="{{$mbk->id}}">{{$mbk->mbk_name}}</option>
@@ -59,7 +79,34 @@
                                                     @endforelse
                                                 </select>
                                             </div>
-                                            
+                                        </div>
+                                        <div class="row">
+                                            <div class="mb-3 col-md-6">
+                                                <label for="people_id" class="form-label"><strong>Select People if Applicable</strong></label>
+                                                <select id="people_id" class="default-select form-control wide" name="people_id">
+                                                    <option value="0" selected>Choose...</option>
+                                                    @forelse($peoples as $people)
+                                                    <option value="{{$people->id}}">{{$people->p_name}}</option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <div class="form-group">
+                                                <label for="note"><strong>Note</strong></label>
+                                                <textarea class="form-control" name="note" id="note" rows="3"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="mb-3 col-md-4">
+                                                <label for="amount" class="form-label"><strong>Amount</strong></label>
+                                                <input type="text" name="amount" class="form-control">
+                                            </div>
+                                        </div> 
+                                        <div class="mb-3 col-md-6">
+                                            <label for="trans_date" class="form-label"><strong>Transaction Date:</strong></label>
+                                            <input type="date" class="form-control" id="trans_date" name="trans_date" rows="3">
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-block">Add Transaction</button>
                                     </form>
@@ -85,6 +132,25 @@
                 }else if(wallet_id == "3"){
                     $('.mobile_bank').show();
                     $('.bank').hide();
+                }
+            }
+        })
+    });
+    </script>
+    <script>
+        $(document).ready(function() {
+        $('.income').hide();
+        $('.expense').hide();
+        $('.trans_type').on('change', function() {
+            var trans_type = $(this).val();
+            if(trans_type) {
+                //console.log(typeof(trans_type));
+                if(trans_type == "2"){
+                    $('.income').hide();
+                    $('.expense').show();
+                }else{
+                    $('.income').show();
+                    $('.expense').hide();
                 }
             }
         })
