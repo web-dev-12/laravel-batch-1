@@ -16,9 +16,7 @@
                         <tr>
                             <th>Sl.</th>
                             <th>Date</th>
-                            <th>Type</th>
                             <th>Income Category</th>
-                            <th>Expense Category</th>
                             <th>Medium</th>
                             <th>Bank || Mobile Bank Name</th>
                             <th>People</th>
@@ -32,15 +30,7 @@
                         <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$transaction->trans_date}}</td>
-                            <td>
-                                @if($transaction->trans_type==1)
-                                Income
-                                @elseif($transaction->trans_type==2)
-                                Expense
-                                @endif
-                            </td>
                             <td>{{optional($transaction->incomes)->income_name}}</td>
-                            <td>{{optional($transaction->expenses)->expense_cat}}</td>
                             <td>
                                 @if($transaction->source_id==1)
                                 Cash | Moneybag

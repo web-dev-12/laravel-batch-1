@@ -20,12 +20,13 @@
                                     <form method="post" action="{{route(currentUser().'.transaction.store')}}">
                                         @csrf
                                         <div class="row">
-                                            <div class="mb-3 col-md-6 income">
-                                                <label for="in_cat" class="form-label"><strong>Select Income</strong></label>
-                                                <select id="in_cat" class="default-select form-control wide" name="in_cat">
+                                            
+                                            <div class="mb-3 col-md-6 expense">
+                                                <label for="exp_cat" class="form-label"><strong>Select Expense</strong></label>
+                                                <select id="exp_cat" class="default-select form-control wide" name="exp_cat">
                                                     <option value="0" selected>Choose...</option>
-                                                    @forelse($all_income_cat as $income)
-                                                    <option value="{{$income->id}}">{{$income->income_name}}</option>
+                                                    @forelse($all_exp_cat as $expense)
+                                                    <option value="{{$expense->id}}">{{$expense->expense_cat}}</option>
                                                     @empty
                                                     @endforelse
                                                 </select>
@@ -37,7 +38,6 @@
                                                 <label for="source_id" class="form-label"><strong>Select Medium</strong></label>
                                                 <select id="source_id" class="default-select form-control wide wallet_type" name="source_id">
                                                     <option value="0" selected><strong>Choose.....</strong></option>
-                                                    <option value="1">Cash|MoneyBag</option>
                                                     <option value="2">Bank</option>
                                                     <option value="3">Mobile Banking</option>
                                                 </select>

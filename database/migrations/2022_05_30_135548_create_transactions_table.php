@@ -17,13 +17,14 @@ class CreateTransactionsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->date('trans_date');
-            $table->tinyInteger('trans_type')->comment('1 => income , 2 =>  expense');
             $table->integer('in_cat')->nullable();
             $table->integer('exp_cat')->nullable();
-            $table->integer('source_id')->nullable()->comment('1 => Cash | Moneybag , 2 =>  Bank, 3 => Mobile Bank');;
+            $table->integer('source_id')->nullable()->comment('1 => Cash | Moneybag , 2 =>  Bank, 3 => Mobile Bank');
             $table->integer('source_cat_id')->nullable();
-            $table->integer('people_id')->nullable();
+            $table->double('old_bal', 10, 2)->nullable();
             $table->double('amount', 10, 2)->nullable();
+            $table->double('new_bal', 10, 2)->nullable();
+            $table->integer('people_id')->nullable();
             $table->string('note')->nullable();
             $table->timestamps();
         });
