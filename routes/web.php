@@ -50,7 +50,8 @@ Route::group(['middleware' => 'isUser'],function(){
         Route::resource('/wallet',WalletController::class,["as" => "user"]);
         Route::resource('/people',PeopleController::class,["as" => "user"]);
         Route::resource('/transaction',TransactionController::class,["as" => "user"]);
-        Route::get('/expense-transaction',[TransactionController::class,'expTransaction']);
+        Route::get('/expense-transaction',[TransactionController::class,'expTransaction'])->name('user.exp');
+        Route::post('/saveexpense-transaction',[TransactionController::class,'saveExpTransaction'])->name('user.saveexp');
     });
 });
 

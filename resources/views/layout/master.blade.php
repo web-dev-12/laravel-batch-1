@@ -644,7 +644,7 @@
 						</a>
                         <ul aria-expanded="false">
                             <li><a href="{{route(currentUser().'.transaction.index')}}"></i>Tranaction List</a></li>
-                            <li><a href="{{route(currentUser().'.transaction.create')}}"></i>Expense Transaction</a></li>
+                            <li><a href="{{route(currentUser().'.exp')}}"></i>Expense Transaction</a></li>
 							<li><a href="{{route(currentUser().'.transaction.create')}}"></i>Income Transaction</a></li>
                         </ul>
                     </li>

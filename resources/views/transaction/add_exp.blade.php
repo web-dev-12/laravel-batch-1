@@ -1,10 +1,10 @@
 @extends('layout.master')
-@section('title','Add Transaction')
+@section('title','Add Expense  Transaction')
 @section('content')
 
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Add Transaction</h4>
+                                <h4 class="card-title">Add Expense Transaction</h4>
                             </div>
                             <div class="card-body">
                                 @if ($errors->any())
@@ -17,7 +17,7 @@
                                     </div>
                                 @endif
                                 <div class="basic-form">
-                                    <form method="post" action="{{route(currentUser().'.transaction.store')}}">
+                                    <form method="post" action="{{route(currentUser().'.saveexp')}}">
                                         @csrf
                                         <div class="row">
                                             
@@ -38,6 +38,7 @@
                                                 <label for="source_id" class="form-label"><strong>Select Medium</strong></label>
                                                 <select id="source_id" class="default-select form-control wide wallet_type" name="source_id">
                                                     <option value="0" selected><strong>Choose.....</strong></option>
+                                                    <option value="1">Cash|Moneybag</option>
                                                     <option value="2">Bank</option>
                                                     <option value="3">Mobile Banking</option>
                                                 </select>

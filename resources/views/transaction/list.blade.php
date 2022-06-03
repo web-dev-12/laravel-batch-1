@@ -17,10 +17,13 @@
                             <th>Sl.</th>
                             <th>Date</th>
                             <th>Income Category</th>
+                            <th>Expense Category</th>
                             <th>Medium</th>
                             <th>Bank || Mobile Bank Name</th>
                             <th>People</th>
-                            <th>Amount</th>
+                            <th>Old Amount</th>
+                            <th>Income/Expense Amount</th>
+                            <th> New Amount</th>
                             <th>Note</th>
                             <th>Action</th>
                         </tr>
@@ -31,6 +34,7 @@
                             <td>{{$loop->iteration}}</td>
                             <td>{{$transaction->trans_date}}</td>
                             <td>{{optional($transaction->incomes)->income_name}}</td>
+                            <td>{{optional($transaction->expenses)->expense_cat}}</td>
                             <td>
                                 @if($transaction->source_id==1)
                                 Cash | Moneybag
@@ -49,7 +53,9 @@
                             <td>
                                 {{optional($transaction->peoples)->p_name}}
                             </td>
+                            <td>{{$transaction->old_bal}}</td>
                             <td>{{$transaction->amount}}</td>
+                            <td>{{$transaction->new_bal}}</td>
                             <td>{{$transaction->note}}</td>
                             <td>
                                 <div class="d-flex">

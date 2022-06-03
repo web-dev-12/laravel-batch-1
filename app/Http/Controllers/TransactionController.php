@@ -83,7 +83,7 @@ class TransactionController extends Controller
         $transaction                    = new Transaction();
         $transaction->trans_date        = date('Y-m-d',strtotime($request->trans_date));
         $transaction->in_cat            = $request->in_cat;
-        $transaction->source_id         = $request->source_id?$request->source_id:null;
+        $transaction->source_id          = $request->source_id?$request->source_id:null;
         $transaction->source_cat_id     = $request->source_cat_id?$request->source_cat_id:null;
         $transaction->people_id         = $request->people_id?$request->people_id:null;
         $transaction->old_bal           = $wallet->amount;
@@ -94,7 +94,42 @@ class TransactionController extends Controller
         $transaction->save(); 
         return redirect()->route(currentUser().'.transaction.index');
     }
+     /* ==== Expense Transaction store ===== */
+    public function saveExpTransaction(Request $request)
+    {
+      
+        if($request->source_id == 1)
+        $wallet = Wallet::where(['user_id'=> Session::get('user'),'wallet_type' => $request->source_id])->orderBy('id', 'DESC')->first();
+        elseif($request->source_id == 2)
+        $wallet = Wallet::where(['user_id'=> Session::get('user'),'bank_id' => $request->source_cat_id])->orderBy('id', 'DESC')->first();
+        else
+        $wallet = Wallet::where(['user_id'=> Session::get('user'),'mobile_bank_id' => $request->source_cat_id])->orderBy('id', 'DESC')->first();
 
+        /*====Old balance======  */
+        $wallet_new_bal = $wallet->amount;
+        /* ===New Balance==== */
+        $wallet_new_bal -= $request->amount;
+
+        /*====Add To Wallet Table With Update Query===== */
+        $update_wallet = Wallet::find($wallet->id);
+        $update_wallet->amount = $wallet_new_bal;
+        $update_wallet->save();
+
+       
+        $transaction                    = new Transaction();
+        $transaction->trans_date        = date('Y-m-d',strtotime($request->trans_date));
+        $transaction->exp_cat            = $request->exp_cat;
+        $transaction->source_id          = $request->source_id?$request->source_id:null;
+        $transaction->source_cat_id     = $request->source_cat_id?$request->source_cat_id:null;
+        $transaction->people_id         = $request->people_id?$request->people_id:null;
+        $transaction->old_bal           = $wallet->amount;
+        $transaction->amount            = $request->amount;
+        $transaction->new_bal           = $wallet_new_bal;
+        $transaction->note              = $request->note;
+        $transaction->user_id           = request()->session()->get('user');
+        $transaction->save(); 
+        return redirect()->route(currentUser().'.transaction.index');
+    }
     /**
      * Display the specified resource.
      *
