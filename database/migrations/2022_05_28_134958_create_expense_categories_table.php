@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Carbon\carbon;
 
 class CreateExpenseCategoriesTable extends Migration
 {
@@ -19,6 +20,25 @@ class CreateExpenseCategoriesTable extends Migration
             $table->tinyInteger('status')->default(1)->comment("1 => active, 0 => inactive ");
             $table->timestamps();
         });
+
+        DB::table('expense_categories')->insert([
+            [
+            'expense_cat'      => 'Home Rent',
+            'created_at'    =>  carbon::now()
+            ],
+            [
+            'expense_cat'      => 'Transport',
+            'created_at'    =>  carbon::now()
+            ],
+            [
+            'expense_cat'      => 'Medicine',
+            'created_at'    =>  carbon::now()
+            ],     
+            [
+            'expense_cat'      => 'Food',
+            'created_at'    =>  carbon::now()
+            ],     
+        ]);
     }
 
     /**

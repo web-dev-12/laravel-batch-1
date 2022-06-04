@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Carbon\carbon;
 
 class CreateBanksTable extends Migration
 {
@@ -19,6 +20,25 @@ class CreateBanksTable extends Migration
             $table->tinyInteger('status')->default(1)->comment("1 => active, 0 => inactive ");
             $table->timestamps();
         });
+
+        DB::table('banks')->insert([
+            [
+            'bank_name'      => 'Bank Asia',
+            'created_at'    =>  carbon::now()
+            ],
+            [
+            'bank_name'      => 'DBBL',
+            'created_at'    =>  carbon::now()
+            ],
+            [
+            'bank_name'      => 'EBL',
+            'created_at'    =>  carbon::now()
+            ],     
+            [
+            'bank_name'      => 'City Bank',
+            'created_at'    =>  carbon::now()
+            ]     
+        ]);
     }
 
     /**

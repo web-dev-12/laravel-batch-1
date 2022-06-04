@@ -17,7 +17,7 @@
                                     </div>
                                 @endif
                                 <div class="basic-form">
-                                    <form method="post" action="{{route(currentUser().'.saveexp')}}">
+                                    <form method="post" action="{{route(currentUser().'.transaction.saveexp')}}">
                                         @csrf
                                         <div class="row">
                                             

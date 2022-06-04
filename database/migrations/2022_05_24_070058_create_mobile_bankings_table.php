@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Carbon\carbon;
 
 class CreateMobileBankingsTable extends Migration
 {
@@ -19,6 +20,25 @@ class CreateMobileBankingsTable extends Migration
             $table->tinyInteger('status')->default(1)->comment("1 => active, 0 => inactive ");
             $table->timestamps();
         });
+
+        DB::table('mobile_bankings')->insert([
+            [
+            'mbk_name'      => 'Bkash',
+            'created_at'    =>  carbon::now()
+            ],
+            [
+            'mbk_name'      => 'Rocket',
+            'created_at'    =>  carbon::now()
+            ],
+            [
+            'mbk_name'      => 'Nagad',
+            'created_at'    =>  carbon::now()
+            ],     
+            [
+            'mbk_name'      => 'Upay',
+            'created_at'    =>  carbon::now()
+            ]     
+        ]);
     }
 
     /**
