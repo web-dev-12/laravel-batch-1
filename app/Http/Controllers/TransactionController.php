@@ -61,7 +61,7 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-      
+        //dd($request->toArray());
         if($request->source_id == 1)
         $wallet = Wallet::where(['user_id'=> Session::get('user'),'wallet_type' => $request->source_id])->orderBy('id', 'DESC')->first();
         elseif($request->source_id == 2)
@@ -132,29 +132,58 @@ class TransactionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request->toArray());
+        //dd($request->toArray());
         $transaction = Transaction::find($id);
         if($transaction->source_id != $request->source_id)//check parent Wallet
         {
+            if($request->source_bank_cat_id)
+            $source_back_mbk_cat_id = $request->source_bank_cat_id;
+            else
+            $source_back_mbk_cat_id = $request->source_mbk_cat_id;
+            
+        
             /*Old Wallet Amunt Deduct */
-           /* if($transaction->source_cat_id){
-                dd($this->get_wallet_balance($transaction->source_id,$transaction->source_cat_id));
+            if($transaction->source_id == 2 ){
+                $old_wall_bal = $this->get_wallet_balance($transaction->source_id,$transaction->bank_id);
+            }elseif($transaction->source_id == 3){
+                $old_wall_bal = $this->get_wallet_balance($transaction->source_id,$transaction->mobile_bank_id);
             }else
-            dd($this->get_wallet_balance($transaction->source_id));*/
+            $old_wal_bal = $this->get_wallet_balance($transaction->source_id,null);
+            //echo $old_wal_bal->amount;
 
             /*New Wallet Amount Add */
-            if($request->source_cat_id){
-                $this->get_wallet_balance($request->source_id,$request->source_cat_id);
+            if($request->source_id){
+                $new_wal_bal = $this->get_wallet_balance($request->source_id,$source_back_mbk_cat_id);
             }else
-            $this->get_wallet_balance($request->source_id,null);
+            $new_wal_bal = $this->get_wallet_balance($request->source_id,null);
+            if(!empty($new_wal_bal))
+            $new_wal_bal = $new_wal_bal->amount;
+            else
+            $new_wal_bal = 0;
+            //echo  $new_wal_bal;
+
+
+           
+
+            /*Add To Wallet Table With Update Query */
+            if($request->source_id == 1)
+            $wallet = Wallet::where(['user_id'=> Session::get('user'),'wallet_type' => $request->source_id])->orderBy('id', 'DESC')->first();
+            elseif($request->source_id == 2)
+            $wallet = Wallet::where(['user_id'=> Session::get('user'),'bank_id' => $request->source_bank_cat_id])->orderBy('id', 'DESC')->first();
+            else
+            $wallet = Wallet::where(['user_id'=> Session::get('user'),'mobile_bank_id' => $request->source_mbk_cat_id])->orderBy('id', 'DESC')->first();
+dd($wallet);die;
+            $update_wallet = Wallet::find($wallet->id);
+            $update_wallet->amount = $wallet_new_bal;
+            $update_wallet->save();
+
         }
-
-
         //dd($transaction);
         $transaction->trans_date        = date('Y-m-d',strtotime($request->trans_date));
         $transaction->in_cat            = $request->in_cat;
         $transaction->source_id         = $request->source_id?$request->source_id:null;
-        $transaction->source_cat_id     = $request->source_cat_id?$request->source_cat_id:null;
+        $transaction->source_bank_cat_id    = $request->source_bank_cat_id?$request->source_bank_cat_id:null;
+        $transaction->source_cat_id         = $request->source_mbk_cat_id?$request->source_mbk_cat_id:null;
         $transaction->people_id         = $request->people_id?$request->people_id:null;
         /*$transaction->old_bal           = $wallet->amount;
         $transaction->amount            = $request->amount;
@@ -165,18 +194,17 @@ class TransactionController extends Controller
         //return redirect()->route(currentUser().'.transaction.index');
     }
     public function get_wallet_balance($wallet_type,$wallet_cat_type){
-       
+        /*echo $wallet_type;
+        echo $wallet_cat_type;die();*/
         if($wallet_type == 1)
-        $wallet = Wallet::where(['user_id'=> Session::get('user'),'wallet_type' => $wallet_type])->orderBy('id', 'DESC')->first();
-        elseif($wallet_type == 2){
-            echo $wallet_cat_type;die();
+            $wallet = Wallet::where(['user_id'=> Session::get('user'),'wallet_type' => $wallet_type])->orderBy('id', 'DESC')->first();
+        elseif($wallet_type == 2)
             $wallet = Wallet::where(['user_id'=> Session::get('user'),'bank_id' => $wallet_cat_type])->orderBy('id', 'DESC')->first();
-       
-        }
-       
         else
-        $wallet = Wallet::where(['user_id'=> Session::get('user'),'mobile_bank_id' => $wallet_cat_type])->orderBy('id', 'DESC')->first();
-        return $wallet;
+            $wallet = Wallet::where(['user_id'=> Session::get('user'),'mobile_bank_id' => $wallet_cat_type])->orderBy('id', 'DESC')->first();
+        if($wallet)
+        return  $wallet;
+        
     }
 
     /**

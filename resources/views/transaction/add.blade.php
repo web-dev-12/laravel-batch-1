@@ -43,9 +43,9 @@
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-md-6 bank">
-                                                <label for="source_cat_id" class="form-label"><strong>Select Bank</strong></label>
-                                                <select id="source_cat_id" class="default-select form-control wide" name="source_cat_id">
-                                                    <option value="0" selected>Choose...</option>
+                                                <label for="source_bank_cat_id" class="form-label"><strong>Select Bank</strong></label>
+                                                <select id="source_bank_cat_id" class="form-control wide" name="source_bank_cat_id">
+                                                    <option value="">Choose...</option>
                                                     @forelse($banks as $bank)
                                                     <option value="{{$bank->id}}">{{$bank->bank_name}}</option>
                                                     @empty
@@ -53,9 +53,9 @@
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-md-6 mobile_bank">
-                                                <label for="source_cat_id" class="form-label"><strong>Select Mobile Banking</strong></label>
-                                                <select id="source_cat_id" class="default-select form-control wide" name="source_cat_id">
-                                                    <option value="0" selected>Choose...</option>
+                                                <label for="source_mbk_cat_id" class="form-label"><strong>Select Mobile Banking</strong></label>
+                                                <select id="source_mbk_cat_id" class="form-control wide" name="source_mbk_cat_id">
+                                                    <option value="">Choose...</option>
                                                     @forelse($mobile_bankings as $mbk)
                                                     <option value="{{$mbk->id}}">{{$mbk->mbk_name}}</option>
                                                     @empty
@@ -66,8 +66,8 @@
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
                                                 <label for="people_id" class="form-label"><strong>Select People if Applicable</strong></label>
-                                                <select id="people_id" class="default-select form-control wide" name="people_id">
-                                                    <option value="0" selected>Choose...</option>
+                                                <select id="people_id" class="form-control wide" name="people_id">
+                                                    <option value="">Choose...</option>
                                                     @forelse($peoples as $people)
                                                     <option value="{{$people->id}}">{{$people->p_name}}</option>
                                                     @empty

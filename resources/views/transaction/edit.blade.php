@@ -36,7 +36,7 @@
                                         <div class="row">    
                                             <div class="mb-3 col-md-6">
                                                 <label for="source_id" class="form-label"><strong>Select Medium</strong></label>
-                                                <select id="source_id" class="default-select form-control wide wallet_type" name="source_id">
+                                                <select id="source_id" class="form-control wide wallet_type" name="source_id">
                                                     <option value="0"><strong>Choose.....</strong></option>
                                                     <option value="1" @if($transaction->source_id ==1) selected @endif>Cash|MoneyBag</option>
                                                     <option value="2" @if($transaction->source_id ==2) selected @endif>Bank</option>
@@ -44,9 +44,9 @@
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-md-6 bank">
-                                                <label for="source_cat_id" class="form-label"><strong>Select Bank</strong></label>
-                                                <select id="source_cat_id" class="default-select form-control wide" name="source_cat_id">
-                                                    <option value="0">Choose...</option>
+                                                <label for="source_bank_cat_id" class="form-label"><strong>Select Bank</strong></label>
+                                                <select id="source_bank_cat_id" class="form-control wide" name="source_bank_cat_id">
+                                                    <option value="">Choose...</option>
                                                     @forelse($banks as $bank)
                                                     <option value="{{$bank->id}}" @if($bank->id == $transaction->source_cat_id) selected @endif>{{$bank->bank_name}}</option>
                                                     @empty
@@ -54,9 +54,9 @@
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-md-6 mobile_bank">
-                                                <label for="source_cat_id" class="form-label"><strong>Select Mobile Banking</strong></label>
-                                                <select id="source_cat_id" class="default-select form-control wide" name="source_cat_id">
-                                                    <option value="0">Choose...</option>
+                                                <label for="source_mbk_cat_id" class="form-label"><strong>Select Mobile Banking</strong></label>
+                                                <select id="source_mbk_cat_id" class="form-control wide" name="source_mbk_cat_id">
+                                                    <option value="">Choose...</option>
                                                     @forelse($mobile_bankings as $mbk)
                                                     <option value="{{$mbk->id}}" @if($mbk->id == $transaction->source_cat_id) selected @endif>{{$mbk->mbk_name}}</option>
                                                     @empty
@@ -68,7 +68,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="people_id" class="form-label"><strong>Select People if Applicable</strong></label>
                                                 <select id="people_id" class="default-select form-control wide" name="people_id">
-                                                    <option value="0">Choose...</option>
+                                                    <option value="">Choose...</option>
                                                     @forelse($peoples as $people)
                                                     <option value="{{$people->id}}" @if($people->id == $transaction->people_id) selected @endif>{{$people->p_name}}</option>
                                                     @empty
