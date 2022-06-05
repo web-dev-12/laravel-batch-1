@@ -62,7 +62,7 @@
 <script>	
     $(document).ready(function(){
         $('#last_installment').on('input',function() {
-            var fnum = parseInt($('#current_due').val());
+            var fnum = parseFloat($('#current_due').val());
             var lnum = parseFloat($('#last_installment').val());
             $('#due').val((fnum - lnum ? fnum - lnum : 0).toFixed(2));
         });

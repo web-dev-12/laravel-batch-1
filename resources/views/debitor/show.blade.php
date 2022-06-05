@@ -16,7 +16,8 @@
                         <tr class="text-center">
                             <th>Sl.</th>
                             <th>Name</th>
-                            <th>Update an Installment</th>
+                            <th>Currently Due (BDT)</th>
+                            <th>Pay an Installment</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -24,6 +25,7 @@
                         <tr class="text-center">
                             <td>{{$loop->iteration}}</td>
                             <td>{{$people->p_name}}</td>
+                            <td>{{$people->current_due}}</td>
                             <td><a href="{{route(currentUser().'.debitor.edit',$people->id)}}"><i class="fas fa-money-check-alt fa-2x"></i></a></td>
                         </tr>
                         @empty
