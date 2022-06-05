@@ -16,7 +16,7 @@
                         <tr class="text-center">
                             <th>Sl.</th>
                             <th>Name</th>
-                            <th>Enter an Installment</th>
+                            <th>Update an Installment</th>
                         </tr>
                     </thead>
                     <tbody>

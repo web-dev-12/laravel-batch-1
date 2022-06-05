@@ -17,7 +17,7 @@
                                     </div>
                                 @endif
                                 <div class="basic-form">
-                                    <form method="post" action="{{route(currentUser().'.debitor.update', $people->id)}}">
+                                    <form autocomplete="off" method="post" action="{{route(currentUser().'.debitor.update', $people->id)}}">
                                         @method('PUT')    
                                         @csrf
                                         <div class="mb-3">
@@ -35,6 +35,10 @@
                                         <div class="mb-3">
                                             <label for="last_installment" class="mb-1"><strong>This Installment</strong></label>
                                             <input type="text" name="last_installment" id="last_installment" class="form-control">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="due" class="mb-1"><strong>Due after this Installment</strong></label>
+                                            <input type="text" name="due" id="due" readonly class="form-control">
                                         </div>
                                         <div class="mb-3">
                                             <label for="" class="mb-1"><strong>Type</strong></label>
@@ -55,7 +59,14 @@
                         </div>
 
 @push('scripts')
-    <script>
-    </script>
+<script>	
+    $(document).ready(function(){
+        $('#last_installment').on('input',function() {
+            var fnum = parseInt($('#current_due').val());
+            var lnum = parseFloat($('#last_installment').val());
+            $('#due').val((fnum - lnum ? fnum - lnum : 0).toFixed(2));
+        });
+    })
+</script>
 @endpush					
 @endsection
