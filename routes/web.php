@@ -14,6 +14,7 @@ use App\Http\Controllers\PeopleController;
 use App\Http\Controllers\ExpenseCategoryController;
 use App\Http\Controllers\IncomeCategoryController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\CreditorController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,6 +53,7 @@ Route::group(['middleware' => 'isUser'],function(){
         Route::resource('/transaction',TransactionController::class,["as" => "user"]);
         Route::get('/expense-transaction',[TransactionController::class,'expTransaction'])->name('user.exp');
         Route::post('/saveexpense-transaction',[TransactionController::class,'saveExpTransaction'])->name('user.saveexp');
+        Route::resource('/creditor',CreditorController::class,["as" => "user"]);
     });
 });
 

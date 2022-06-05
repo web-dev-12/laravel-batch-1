@@ -636,6 +636,16 @@
                         <ul aria-expanded="false">
                             <li><a href="{{route(currentUser().'.people.index')}}"></i>People List</a></li>
                             <li><a href="{{route(currentUser().'.people.create')}}"></i>Add People</a></li>
+						
+                        </ul>
+                    </li>
+					<li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+						<i class="fas fa-user"></i>
+							<span class="nav-text">Creditor</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route(currentUser().'.creditor.index')}}"></i>Creditor Transaction List</a></li>
+							<li><a href="{{route(currentUser().'.creditor.create')}}"></i>Add Creditor</a></li>
                         </ul>
                     </li>
 					<li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
