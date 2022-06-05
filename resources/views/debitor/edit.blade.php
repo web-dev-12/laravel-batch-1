@@ -1,10 +1,10 @@
 @extends('layout.master')
-@section('title','Add People')
+@section('title','Update Debitor')
 @section('content')
 
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Add People</h4>
+                                <h4 class="card-title">Update Debitor</h4>
                             </div>
                             <div class="card-body">
                                 @if ($errors->any())
@@ -17,38 +17,37 @@
                                     </div>
                                 @endif
                                 <div class="basic-form">
-                                    <form method="post" action="{{route(currentUser().'.people.store')}}">
+                                    <form method="post" action="{{route(currentUser().'.debitor.update', $people->id)}}">
+                                        @method('PUT')    
                                         @csrf
                                         <div class="mb-3">
                                             <label for="p_name" class="mb-1"><strong>Name</strong></label>
-                                            <input type="text" name="p_name" id="p_name" class="form-control" value="{{old('p_name')}}">
+                                            <input type="text" name="p_name" id="p_name" class="form-control" readonly value="{{$people->p_name}}">
                                         </div>
                                         <div class="mb-3">
                                             <label for="phone" class="mb-1"><strong>Contact No</strong></label>
-                                            <input type="text" name="phone" id="phone" class="form-control" value="{{old('phone')}}">
+                                            <input type="text" name="phone" id="phone" class="form-control" readonly value="{{$people->phone}}">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="initial_amount" class="mb-1"><strong>Due Amount</strong></label>
-                                            <input type="text" name="initial_amount" id="initial_amount" class="form-control" value="{{old('initial_amount')}}">
+                                            <label for="current_due" class="mb-1"><strong>Due Amount</strong></label>
+                                            <input type="text" name="current_due" id="current_due" class="form-control" readonly value="{{$people->current_due}}">
                                         </div>
-                                        <div class="row">
-                                            <div class="mb-3 col-md-12">
-                                                    <label for="type" class="form-label"><strong>Type</strong></label>
-                                                    <select id="type" class="default-select form-control wide" name="type">
-                                                        <option selected="">Choose...</option>
-                                                        <option value="1">Debitors</option>
-                                                        <option value="2">Creditors</option>
-                                                    </select>
-                                            </div>
+                                        <div class="mb-3">
+                                            <label for="last_installment" class="mb-1"><strong>This Installment</strong></label>
+                                            <input type="text" name="last_installment" id="last_installment" class="form-control">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="mb-1"><strong>Type</strong></label>
+                                            <input type="text" name="" id="" class="form-control" readonly placeholder="Debitors">
                                         </div>
                                         <div class="mb-3 row">
                                             <div class="form-group">
                                                 <label for="note"><strong>Note || Address </strong></label>
-                                                <textarea class="form-control" name="note" id="note" rows="3"></textarea>
+                                                <textarea class="form-control" name="note" id="note" rows="3"  readonly>{{$people->note}}</textarea>
                                             </div>
                                         </div>  
                                         <div class="text-center">
-                                            <button type="submit" class="btn btn-primary btn-block">Add</button>
+                                            <button type="submit" class="btn btn-primary btn-block">Update</button>
                                         </div>
                                     </form>
                                 </div>

@@ -42,13 +42,14 @@ class PeopleController extends Controller
         /*$request->validate([
             
         ]);*/
-        $people                 = new People();
-        $people->p_name         = $request->p_name;
-        $people->phone          = $request->phone;
-        $people->due_amount     = $request->due_amount;
-        $people->type           = $request->type;
-        $people->note           = $request->note;
-        $people->user_id        = request()->session()->get('user');
+        $people                     = new People();
+        $people->p_name             = $request->p_name;
+        $people->phone              = $request->phone;
+        $people->initial_amount     = $request->initial_amount;
+        $people->current_due        = $request->initial_amount;
+        $people->type               = $request->type;
+        $people->note               = $request->note;
+        $people->user_id            = request()->session()->get('user');
         $people->save(); 
         return redirect()->route(currentUser().'.people.index');
 
@@ -88,13 +89,14 @@ class PeopleController extends Controller
 
     public function update(Request $request, $id)
     {
-        $people                 = People::find($id);
-        $people->p_name         = $request->p_name;
-        $people->phone          = $request->phone;
-        $people->due_amount     = $request->due_amount;
-        $people->type           = $request->type;
-        $people->note           = $request->note;
-        $people->user_id        = request()->session()->get('user');
+        $people                     = People::find($id);
+        $people->p_name             = $request->p_name;
+        $people->phone              = $request->phone;
+        $people->initial_amount     = $request->initial_amount;
+        $people->current_due        = $request->initial_amount;
+        $people->type               = $request->type;
+        $people->note               = $request->note;
+        $people->user_id            = request()->session()->get('user');
         $people->save(); 
         return redirect()->route(currentUser().'.people.index');
     }

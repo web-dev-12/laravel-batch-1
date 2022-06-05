@@ -636,6 +636,8 @@
                         <ul aria-expanded="false">
                             <li><a href="{{route(currentUser().'.people.index')}}"></i>People List</a></li>
                             <li><a href="{{route(currentUser().'.people.create')}}"></i>Add People</a></li>
+                            <li><a href="{{route(currentUser().'.debitor.create')}}"></i>Update Debitors</a></li>
+                            <li><a href="{{route(currentUser().'.debitor.index')}}"></i>Debitors List</a></li>
                         </ul>
                     </li>
 					<li><a class="has-arrow " href="javascript:void()" aria-expanded="false">

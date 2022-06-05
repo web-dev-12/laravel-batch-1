@@ -29,8 +29,8 @@
                                             <input type="text" name="phone" id="phone" class="form-control" value="{{$people->phone}}">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="due_amount" class="mb-1"><strong>Due Amount</strong></label>
-                                            <input type="text" name="due_amount" id="due_amount" class="form-control" value="{{$people->due_amount}}">
+                                            <label for="initial_amount" class="mb-1"><strong>Due Amount</strong></label>
+                                            <input type="text" name="initial_amount" id="initial_amount" class="form-control" value="{{$people->initial_amount}}">
                                         </div>
                                         <div class="row">
                                             <div class="mb-3 col-md-12">

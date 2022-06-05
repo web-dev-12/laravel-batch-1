@@ -35,6 +35,26 @@ class CreateBanksTable extends Migration
             'created_at'    =>  carbon::now()
             ],     
             [
+            'bank_name'      => 'Standard Chatered',
+            'created_at'    =>  carbon::now()
+            ],     
+            [
+            'bank_name'      => 'IFIC',
+            'created_at'    =>  carbon::now()
+            ],     
+            [
+            'bank_name'      => 'AB Bank',
+            'created_at'    =>  carbon::now()
+            ],     
+            [
+            'bank_name'      => 'Premier Bank',
+            'created_at'    =>  carbon::now()
+            ],     
+            [
+            'bank_name'      => 'UCBL',
+            'created_at'    =>  carbon::now()
+            ],     
+            [
             'bank_name'      => 'City Bank',
             'created_at'    =>  carbon::now()
             ]     

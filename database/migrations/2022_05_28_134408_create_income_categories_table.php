@@ -22,7 +22,7 @@ class CreateIncomeCategoriesTable extends Migration
         });
         DB::table('income_categories')->insert([
             [
-            'income_name'      => 'Sallary',
+            'income_name'      => 'Salary',
             'created_at'    =>  carbon::now()
             ],
             [

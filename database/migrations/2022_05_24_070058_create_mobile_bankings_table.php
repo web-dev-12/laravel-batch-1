@@ -35,6 +35,18 @@ class CreateMobileBankingsTable extends Migration
             'created_at'    =>  carbon::now()
             ],     
             [
+            'mbk_name'      => 'Mcash',
+            'created_at'    =>  carbon::now()
+            ],     
+            [
+            'mbk_name'      => 'Sure Cash',
+            'created_at'    =>  carbon::now()
+            ],     
+            [
+            'mbk_name'      => 'Trust Axiata Pay',
+            'created_at'    =>  carbon::now()
+            ],     
+            [
             'mbk_name'      => 'Upay',
             'created_at'    =>  carbon::now()
             ]     

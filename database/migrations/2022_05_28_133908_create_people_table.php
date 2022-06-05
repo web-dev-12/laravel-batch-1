@@ -18,7 +18,9 @@ class CreatePeopleTable extends Migration
             $table->string('p_name');
             $table->string('phone')->nullable();
             $table->string('note')->nullable();
-            $table->double('due_amount');
+            $table->double('initial_amount');
+            $table->double('last_installment')->nullable();
+            $table->double('current_due')->nullable();
             $table->bigInteger('user_id');
             $table->tinyInteger('type')->comment('1 =>debitors, 2=> creditors');
             $table->tinyInteger('status')->default(1)->comment('1 =>active, 2=> inactive');

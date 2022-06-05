@@ -14,6 +14,7 @@ use App\Http\Controllers\PeopleController;
 use App\Http\Controllers\ExpenseCategoryController;
 use App\Http\Controllers\IncomeCategoryController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\DebitorController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -50,6 +51,7 @@ Route::group(['middleware' => 'isUser'],function(){
         Route::resource('/wallet',WalletController::class,["as" => "user"]);
         Route::resource('/people',PeopleController::class,["as" => "user"]);
         Route::resource('/transaction',TransactionController::class,["as" => "user"]);
+        Route::resource('/debitor',DebitorController::class,["as" => "user"]);
         Route::get('/expense-transaction',[TransactionController::class,'expTransaction'])->name('user.transaction.exp');
         Route::post('/saveexpense-transaction',[TransactionController::class,'saveExpTransaction'])->name('user.transaction.saveexp');
     });
