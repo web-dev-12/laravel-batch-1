@@ -14,6 +14,7 @@ use App\Http\Controllers\PeopleController;
 use App\Http\Controllers\ExpenseCategoryController;
 use App\Http\Controllers\IncomeCategoryController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\ReportController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,6 +52,9 @@ Route::group(['middleware' => 'isUser'],function(){
         Route::resource('/people',PeopleController::class,["as" => "user"]);
         Route::resource('/transaction',TransactionController::class,["as" => "user"]);
         Route::get('/expense-transaction',[TransactionController::class,'expTransaction']);
+        Route::get('/report',[ReportController::class,'transaction_report'])->name('user.report');
+        Route::get('/report/search',[ReportController::class,'transaction_report_by_search'])->name('user.search');
+        Route::get('/pdf',[ReportController::class,'pdf'])->name('user.pdf');
     });
 });
 

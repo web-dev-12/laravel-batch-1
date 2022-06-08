@@ -84,7 +84,8 @@ class TransactionController extends Controller
         $transaction->trans_date        = date('Y-m-d',strtotime($request->trans_date));
         $transaction->in_cat            = $request->in_cat;
         $transaction->source_id         = $request->source_id?$request->source_id:null;
-        $transaction->source_cat_id     = $request->source_cat_id?$request->source_cat_id:null;
+        $transaction->source_bank_cat_id    = $request->source_bank_cat_id?$request->source_bank_cat_id:null;
+        $transaction->source_mbk_cat_id         = $request->source_mbk_cat_id?$request->source_mbk_cat_id:null;
         $transaction->people_id         = $request->people_id?$request->people_id:null;
         $transaction->old_bal           = $wallet->amount;
         $transaction->amount            = $request->amount;
@@ -115,7 +116,7 @@ class TransactionController extends Controller
     /*Income Edit */
     public function edit($id)
     {
-        $banks              = Bank::where('status','=', 1)->get();
+        $banks              = Bank::where(['status'=> 1])->get();
         $mobile_bankings    = MobileBanking::where('status','=',1)->get();
         $peoples            = People::where('user_id','=',Session::get('user'))->orderBy('id', 'DESC')->get();
         $all_income_cat     = IncomeCategory::where('status','=', 1)->get();
@@ -213,8 +214,27 @@ dd($wallet);die;
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Transaction $transaction)
+    public function destroy(Request $request, $id)
     {
-        //
+        $transaction = Transaction::find($id);
+        if($request->source_id == 1)
+        $wallet = Wallet::where(['user_id'=> Session::get('user'),'wallet_type' => $request->source_id])->orderBy('id', 'DESC')->first();
+        elseif($request->source_id == 2)
+        $wallet = Wallet::where(['user_id'=> Session::get('user'),'bank_id' => $request->source_cat_id])->orderBy('id', 'DESC')->first();
+        else
+        $wallet = Wallet::where(['user_id'=> Session::get('user'),'mobile_bank_id' => $request->source_cat_id])->orderBy('id', 'DESC')->first();
+
+        /*Old balance */
+        $wallet_amt = $wallet->amount;
+        $wallet_tr_bal = $transaction->amount;
+        /*New Balance */
+        $wallet_new_bal = $wallet_amt-$wallet_tr_bal;
+
+        /*Add To Wallet Table With Update Query */
+        $update_wallet = Wallet::find($wallet->id);
+        $update_wallet->amount = $wallet_new_bal;
+        $update_wallet->save();
+
+        Transaction::destroy($id);
     }
 }

@@ -648,6 +648,14 @@
 							<li><a href="{{route(currentUser().'.transaction.create')}}"></i>Income Transaction</a></li>
                         </ul>
                     </li>
+					<li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+						<i class="fas fa-user"></i>
+							<span class="nav-text">Report</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route(currentUser().'.report')}}"></i>Report</a></li>
+                        </ul>
+                    </li>
 					@endif
 					@if(currentUser() == 'superadmin')
                     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
